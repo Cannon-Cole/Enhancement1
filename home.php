@@ -31,45 +31,47 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-bar">
+                  <section class="bottom-bar">
+                <section class="reviews">
+                    <h3>Reviews</h3>
+                    <ul>
+                        <li>"I don't know how I ever caught roadrunners before this." (4/5)</li>
+                        <li>"That thing was fast!" (4/5)</li>
+                        <li>"Talk about fast delivery." (5/5)</li>
+                        <li>"I didn't even have to pull the meat apart." (4.5/5)</li>
+                        <li>"I'm on my thirtieth one. I love these things!" (5/5)</li>
+                    </ul>
+                </section>
+              
                     <section class="recipes">
-                        <div>
+                        <h3>Featured</h3>
+                        <h3>Recipes</h3>
+                        <div class="grid-cell">
                             <img src="images/recipes/bbqsand.jpg" alt="Pulled Roadrunner BBW">
                             <a href="#">Pulled Roadrunner BBQ</a>
 
                         </div>
-                        <div>
+                        <div class="grid-cell">
                             <img src="images/recipes/potpie.jpg" alt="Roadrunner Pot Pie">
                             <a href="#">Roadrunner Pot Pie</a>
 
                         </div>
-                        <div>
-                            <img src="images/recipes/soup.jpg" alt="Roadrunner Soup"></div>
-                        <a href="#">Roadrunner Soup</a>
-
-                        <div>
+                        <div class="grid-cell">
+                            <img src="images/recipes/soup.jpg" alt="Roadrunner Soup">
+                            <a href="#">Roadrunner Soup</a>
+                        </div>
+                        <div class="grid-cell">
                             <img src="images/recipes/taco.jpg" alt="Roadrunner Tacos">
                             <a href="#">Roadrunner Tacos</a>
 
                         </div>
                     </section>
-
-                    <section class="reviews">
-                        <ul>
-                            <li>"I don't know how I ever caught roadrunners before this." (4/5)</li>
-                            <li>"That thing was fast!" (4/5)</li>
-                            <li>"Talk about fast delivery." (5/5)</li>
-                            <li>"I didn't even have to pull the meat apart." (4.5/5)</li>
-                            <li>"I'm on my thirtieth one. I love these things!" (5/5)</li>
-                        </ul>
-                    </section>
                 </section>
             </main>
+            <footer>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/common/footer.php'; ?>
+                <p>Last Updated&#58; 24 September&#44; 2018</p>
+            </footer>
         </div>
-        <footer>
-            <?php include $_SERVER['DOCUMENT_ROOT'] . '/common/footer.php'; ?>
-            <p>Last Updated&#58; 24 September&#44; 2018</p>
-        </footer>
-    </div>
-</body>
+    </body>
 </html>

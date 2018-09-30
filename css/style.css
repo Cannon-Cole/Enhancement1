@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .logoImg {
     width: 150px;
-    height: 50px;
+    height: 40px;
 }
 .accountImg {
     width: 30px;
@@ -63,7 +63,7 @@ li a {
     position: absolute;
     max-width: 100%;
     top: 215px;
-    right: 30px;
+    right: -70px;
     font-size: .8em;
 }
 
@@ -74,6 +74,31 @@ li a {
 .bottom-bar{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.bottom-bar ul{
+
+    padding: 0px;
+}
+
+.recipes
+{
+    display: grid;
+    grid-template-columns: 19% 19%;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    justify-content: center;
+}
+
+.recipes img{
+    display: flex;
+   justify-content: center;
+}
+
+.reviews{
+ text-align: center;
 }
 
 footer {
@@ -83,6 +108,15 @@ footer {
 
 footer p {
     margin: 0px 0px 2px 0px;
+}
+
+h1
+{
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+}
+h3{
+    margin: 0px;
 }
 
 
@@ -111,13 +145,14 @@ footer p {
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
+        min-height: 95vh;
     }
 
     .call-to-action
     {
         font-size: 1.3em;
-        top: -350px;
-        right: 200px;
+        top: -350px; 
+       right: 100px;
     }
 
     #actionbtn
@@ -129,6 +164,19 @@ footer p {
     {
         width: 200px
     }
+    
+    .bottom-bar
+    {
+        flex-direction: row-reverse;
+    }
+    
+    .recipes{
+         grid-template-columns: 23% 23%;
+    }
+    
+    .reviews{
+        align-items: center;
+    }
 
 }
 /******************* END TEMPLATE ******************************/
@@ -136,10 +184,6 @@ footer p {
 /***************************************************************/
 main ul:nth-of-type(1) {
     list-style: none;
-}
-main ul:nth-of-type(1) li {
-    position: relative;
-    left: 100px;
 }
 
 main section:nth-of-type(1) img {
