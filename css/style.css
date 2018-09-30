@@ -71,15 +71,16 @@ li a {
     width: 60%;
 }
 
-.review
-{
-    padding: 0px;
+.bottom-bar{
+    display: flex;
+    flex-direction: column;
 }
 
 footer {
     border-top: 3px solid #000000;
     text-align: center;
 }
+
 footer p {
     margin: 0px 0px 2px 0px;
 }
@@ -115,15 +116,15 @@ footer p {
     .call-to-action
     {
         font-size: 1.3em;
-        top: 35px;
-        right: 400px;
+        top: -350px;
+        right: 200px;
     }
 
     #actionbtn
     {
-       width: 500px;
+        width: 500px;
     }
-    
+
     .call-to-action li
     {
         width: 200px
@@ -140,12 +141,7 @@ main ul:nth-of-type(1) li {
     position: relative;
     left: 100px;
 }
-main ul:nth-of-type(1) img {
-    max-width: 100%;
-}
-main section:nth-of-type(1) {
-    display: flex;
-}
+
 main section:nth-of-type(1) img {
     max-width: 100%;
 }
