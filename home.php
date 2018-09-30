@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0;   user-scalable=0;">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home | Acme, Inc.</title>
         <link rel="stylesheet" media="screen" href="css/style.css">
     </head>
@@ -32,6 +32,7 @@
                     </div>
                 </section>
                   <section class="bottom-bar">
+                      <h6 class="invisible">Bottom Bar</h6>
                 <section class="reviews">
                     <h3>Reviews</h3>
                     <ul>

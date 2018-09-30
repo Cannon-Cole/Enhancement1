@@ -62,7 +62,7 @@ li a {
 {
     position: absolute;
     max-width: 100%;
-    top: 215px;
+    top: 170px;
     right: -70px;
     font-size: .8em;
 }
@@ -117,6 +117,10 @@ h1
 }
 h3{
     margin: 0px;
+}
+
+.invisible{
+    display: none;
 }
 
 
