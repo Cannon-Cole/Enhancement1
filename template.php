@@ -1,32 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
     <head>
-
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/main.css" media="screen">
-
+        <title>| Acme, Inc.</title>
+        <link rel="stylesheet" media="screen" href="css/style.css">
     </head>
-
     <body>
-
-        <header>
-            <img id="logo" src="images/site/logo.gif">
-            <div class="my-account">
-                <img src="images/site/account.gif">
-                <p>My Account</p>
-            </div>
-        </header>
-
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/modules/nav.php'; ?> 
-        
-        <main>
-            
-            <h1>Content here</h1>
-            
-        </main>
-
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/modules/footer.php'; ?>
-        
+        <div class="wrapper">
+            <header>
+                <?php include $_SERVER['DOCUMENT_ROOT'].'/common/header.php';?>
+            </header>
+            <main>
+                <h1>Content Title Here</h1>
+            </main>
+            <footer>
+                <?php include $_SERVER['DOCUMENT_ROOT'].'/common/footer.php';?>
+                <p>Last Updated&#58; 24 September&#44; 2018</p>
+            </footer>
+        </div>
     </body>
-
 </html>
