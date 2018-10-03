@@ -9,7 +9,7 @@
     <body>
         <div class="wrapper">
             <header>
-                <?php include $_SERVER['DOCUMENT_ROOT'] . '/common/header.php'; ?>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header.php'; ?>
             </header>
             <main>
                 <h1>Welcome to Acme!</h1>
@@ -70,7 +70,7 @@
                 </section>
             </main>
             <footer>
-                <?php include $_SERVER['DOCUMENT_ROOT'] . '/common/footer.php'; ?>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
                 <p>Last Updated&#58; 24 September&#44; 2018</p>
             </footer>
         </div>

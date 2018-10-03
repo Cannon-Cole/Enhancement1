@@ -2,7 +2,7 @@
 
 function acmeConnect() {
     $server = 'localhost';
-    $dbname = 'acm';
+    $dbname = 'acme';
     $username = 'iClient';
     $password = 'PBda0wyV61E75j14';
     $dsn = 'mysql:host=' . $server . ';dbname=' . $dbname;
@@ -17,5 +17,3 @@ function acmeConnect() {
         exit;
     }
 }
-
-acmeConnect();
