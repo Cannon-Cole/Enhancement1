@@ -15,9 +15,9 @@
                 <div class="content-wrapper">
                 <form action="/action_page.php">
                     Email:
-                    <input type="text" name="email" placeholder="Email"><br>
+                    <input type="text" name="clientEmail" placeholder="Email"><br>
                     Password:
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="clientPassword" placeholder="Password">
                     <input type="submit" value="Login">
                 </form> 
                 <p>Not a member?</p>

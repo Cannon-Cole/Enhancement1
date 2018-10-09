@@ -16,13 +16,13 @@
                     <p>All fields required</p>
                     <form action="/action_page.php">
                         First name:
-                        <input type="text" name="firstname" placeholder="First name">
+                        <input type="text" name="clientFirstname" placeholder="First name">
                         Last name:
-                        <input type="password" name="lastname" placeholder="Last name">
+                        <input type="password" name="clientLastname" placeholder="Last name">
                         Email:
-                        <input type="text" name="email" placeholder="Email">
+                        <input type="text" name="clientEmail" placeholder="Email">
                         Password:
-                        <input type="password" name="password" placeholder="Password">
+                        <input type="password" name="clientPassword" placeholder="Password">
                         <input type="submit" value="Sign up">
                     </form>
                 </div>
