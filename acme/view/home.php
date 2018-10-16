@@ -12,8 +12,8 @@
                 <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header.php'; ?>
             </header>
             <main>
-                <h1>Welcome to Acme!</h1>
-                <section>
+                <h1>Welcome to Acme!</h1>     
+                <section>                 
                     <img src="acme/images/site/rocketfeature.jpg" alt="Image of coyote riding a rocket.">
                     <div class="test">
                         <div class="call-to-action">

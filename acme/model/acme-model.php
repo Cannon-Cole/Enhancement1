@@ -1,9 +1,5 @@
 <?php
 
-/*
-  acme model
- */
-
 function getCategories() {
     // Create a connection object from the acme connection function
     $db = acmeConnect();

@@ -14,7 +14,12 @@
             <main>
                 <div class="content-wrapper">
                     <p>All fields required</p>
-                    <form action="/action_page.php">
+                    <?php
+                    if (isset($message)) {
+                        echo $message;
+                    }
+                    ?>
+                    <form method="post" action="/acme/accounts/index.php">
                         First name:
                         <input type="text" name="clientFirstname" placeholder="First name">
                         Last name:
@@ -23,7 +28,9 @@
                         <input type="text" name="clientEmail" placeholder="Email">
                         Password:
                         <input type="password" name="clientPassword" placeholder="Password">
-                        <input type="submit" value="Sign up">
+                        <input type="submit" name="submit" value="Register">
+                        <!-- Add the action name - value pair -->
+                        <input type="hidden" name="action" value="register">
                     </form>
                 </div>
             </main>
