@@ -20,8 +20,8 @@
                     }
                     ?>
                     Category<br>
-                    <?php echo $catList; ?><br>            
-                    <form method="post" id="addProduct" action="/acme/accounts/index.php">
+                    <?php echo $catList; ?><br>    
+                    <form method="post" id="new-product" action="/acme/products/index.php">
                         Name
                         <input type="text" name="invName" id="invName" placeholder="Name">
                         Description

@@ -23,7 +23,7 @@ $navList .= '</ul>';
 //build category
 $increment = 1;
 
-$catList = '<select name="categoryId" form="addProduct">';
+$catList = '<select name="categoryId" form="new-product">';
 foreach ($categories as $category) {
     $catList .= "<option value='" . $increment . "'>" . $category['categoryName'] . "</option>";
     $increment++;
@@ -36,9 +36,6 @@ if ($action == NULL) {
 }
 
 switch ($action) {
-    case 'manage':
-        include '../view/product-management.php';
-        break;
     case 'addCategory':
         include '../view/new-category.php';
         break;
@@ -48,7 +45,7 @@ switch ($action) {
     case 'insertCategory':
         // Filter and store the data
         $categoryName = filter_input(INPUT_POST, 'categoryName');
-        
+
         if (empty($categoryName)) {
             $message = '<p>Please provide a category to add.</p>';
             include '../view/new-category.php';
@@ -85,18 +82,14 @@ switch ($action) {
         $categoryId = filter_input(INPUT_POST, 'categoryId');
         $invVendor = filter_input(INPUT_POST, 'invVendor');
         $invStyle = filter_input(INPUT_POST, 'invStyle');
-
-        if (empty($invName) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) 
-         || empty($invStock) || empty($invSize) || empty($invWeight) || empty($invLocation) 
-         || empty($categoryId) || empty($invVendor) || empty($invStyle)) {
+        if (empty($invName) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invSize) || empty($invWeight) || empty($invLocation) || empty($categoryId) || empty($invVendor) || empty($invStyle)) {
+            echo"asdfasdfasf";
             $message = '<p>Please make sure all fields have a value.</p>';
             include '../view/new-product.php';
             exit;
         }
-
         // Send the data to the model
         $regOutcome = addNewProduct($invName, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invSize, $invWeight, $invLocation, $categoryId, $invVendor, $invStyle);
-
         // Check and report the result
         if ($regOutcome === 1) {
             $message = "<p>Category added.</p>";
@@ -110,5 +103,5 @@ switch ($action) {
         break;
 
     default:
-        include 'acme/view/home.php';
+        include '../view/product-management.php';
 }
