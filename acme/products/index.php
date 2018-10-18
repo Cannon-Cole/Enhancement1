@@ -11,6 +11,7 @@ require_once '../model/products-model.php';
 $categories = getCategories();
 
 // Build a navigation bar using the $categories array
+
 $navList = '<ul>';
 $navList .= "<li><a href='/acme/index.php' title='View the Acme home page'>Home</a></li>";
 foreach ($categories as $category) {
@@ -55,7 +56,6 @@ switch ($action) {
 
         // Check and report the result
         if ($regOutcome === 1) {
-            $message = "<p>Category added.</p>";
             include '../view/new-category.php';
             exit;
         } else {

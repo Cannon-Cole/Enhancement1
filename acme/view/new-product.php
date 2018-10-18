@@ -27,9 +27,9 @@
                         Description
                         <input type="text" name="invDescription" id="invDescription" placeholder="Description">
                         Image path
-                        <input type="text" name="invImage" id="invImage" placeholder="Image path">
+                        <input type="text" name="invImage" id="invImage" value="/acme/images/products/no-image.png" placeholder="Image path">
                         Thumbnail path
-                        <input type="text" name="invThumbnail" id="invThumbnail" placeholder="Thumbnail path">
+                        <input type="text" name="invThumbnail" id="invThumbnail" value="/acme/images/products/no-image.png" placeholder="Thumbnail path">
                         Price
                         <input type="text" name="invPrice" id="invPrice" placeholder="Price">
                         Stock
