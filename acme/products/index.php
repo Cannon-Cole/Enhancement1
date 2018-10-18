@@ -21,10 +21,12 @@ foreach ($categories as $category) {
 $navList .= '</ul>';
 
 //build category
+$increment = 1;
 
-$catList = '<select name=categories>';
+$catList = '<select name="categoryId" form="addProduct">';
 foreach ($categories as $category) {
-    $catList .= "<option value='" . $category['categoryName'] . "'>" . $category['categoryName'] . "</option>";
+    $catList .= "<option value='" . $increment . "'>" . $category['categoryName'] . "</option>";
+    $increment++;
 }
 $catList .= '<select>';
 
@@ -46,8 +48,9 @@ switch ($action) {
     case 'insertCategory':
         // Filter and store the data
         $categoryName = filter_input(INPUT_POST, 'categoryName');
+        
         if (empty($categoryName)) {
-            $message = '<p>Please provide a category to add.' . $categoryName . '</p>';
+            $message = '<p>Please provide a category to add.</p>';
             include '../view/new-category.php';
             exit;
         }
@@ -65,6 +68,46 @@ switch ($action) {
             include '../view/new-category.php';
             exit;
         }
+        break;
+    case 'insertProduct':
+        //invName, invDescription, invImage, invThumbnail, invPrice, invStock, invSize, invWeight, 
+        // invLocation, categoryId, invVendor, invStyle
+        // Filter and store the data
+        $invName = filter_input(INPUT_POST, 'invName');
+        $invDescription = filter_input(INPUT_POST, 'invDescription');
+        $invImage = filter_input(INPUT_POST, 'invImage');
+        $invThumbnail = filter_input(INPUT_POST, 'invThumbnail');
+        $invPrice = filter_input(INPUT_POST, 'invPrice');
+        $invStock = filter_input(INPUT_POST, 'invStock');
+        $invSize = filter_input(INPUT_POST, 'invSize');
+        $invWeight = filter_input(INPUT_POST, 'invWeight');
+        $invLocation = filter_input(INPUT_POST, 'invLocation');
+        $categoryId = filter_input(INPUT_POST, 'categoryId');
+        $invVendor = filter_input(INPUT_POST, 'invVendor');
+        $invStyle = filter_input(INPUT_POST, 'invStyle');
+
+        if (empty($invName) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) 
+         || empty($invStock) || empty($invSize) || empty($invWeight) || empty($invLocation) 
+         || empty($categoryId) || empty($invVendor) || empty($invStyle)) {
+            $message = '<p>Please make sure all fields have a value.</p>';
+            include '../view/new-product.php';
+            exit;
+        }
+
+        // Send the data to the model
+        $regOutcome = addNewProduct($invName, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invSize, $invWeight, $invLocation, $categoryId, $invVendor, $invStyle);
+
+        // Check and report the result
+        if ($regOutcome === 1) {
+            $message = "<p>Category added.</p>";
+            include '../view/new-product.php';
+            exit;
+        } else {
+            $message = "<p>Category add failed</p>";
+            include '../view/new-product.php';
+            exit;
+        }
+        break;
 
     default:
         include 'acme/view/home.php';

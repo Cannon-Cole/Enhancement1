@@ -19,19 +19,34 @@
                         echo $message;
                     }
                     ?>
-                    <?php echo $catList; ?> 
-                    <form method="post" action="/acme/accounts/index.php">
-                        First name:
-                        <input type="text" name="clientFirstname" id="clientFirstname" placeholder="First name">
-                        Last name:
-                        <input type="password" name="clientLastname" id="clientLastname" placeholder="Last name">
-                        Email:
-                        <input type="text" name="clientEmail" id="clientEmail" placeholder="Email">
-                        Password:
-                        <input type="password" name="clientPassword" id="clientPassword" placeholder="Password">
-                        <input type="submit" name="submit" value="Register">
+                    Category<br>
+                    <?php echo $catList; ?><br>            
+                    <form method="post" id="addProduct" action="/acme/accounts/index.php">
+                        Name
+                        <input type="text" name="invName" id="invName" placeholder="Name">
+                        Description
+                        <input type="text" name="invDescription" id="invDescription" placeholder="Description">
+                        Image path
+                        <input type="text" name="invImage" id="invImage" placeholder="Image path">
+                        Thumbnail path
+                        <input type="text" name="invThumbnail" id="invThumbnail" placeholder="Thumbnail path">
+                        Price
+                        <input type="text" name="invPrice" id="invPrice" placeholder="Price">
+                        Stock
+                        <input type="text" name="invStock" id="invStock" placeholder="Stock">
+                        Size
+                        <input type="text" name="invSize" id="invSize" placeholder="Size">
+                        Weight
+                        <input type="text" name="invWeight" id="invWeight" placeholder="Weight">
+                        Location
+                        <input type="text" name="invLocation" id="invLocation" placeholder="Location">
+                        Vendor
+                        <input type="text" name="invVendor" id="invVendor" placeholder="Vendor">
+                        Style
+                        <input type="text" name="invStyle" id="invStyle" placeholder="Style">                      
+                        <input type="submit" name="submit" value="Add Product">
                         <!-- Add the action name - value pair -->
-                        <input type="hidden" name="action" value="register">
+                        <input type="hidden" name="action" value="insertProduct">
                     </form>
                 </div>
             </main>
