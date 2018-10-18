@@ -21,13 +21,13 @@
                     ?>
                     <form method="post" action="/acme/accounts/index.php">
                         First name:
-                        <input type="text" name="clientFirstname" placeholder="First name">
+                        <input type="text" name="clientFirstname" id="clientFirstname" placeholder="First name">
                         Last name:
-                        <input type="password" name="clientLastname" placeholder="Last name">
+                        <input type="password" name="clientLastname" id="clientLastname" placeholder="Last name">
                         Email:
-                        <input type="text" name="clientEmail" placeholder="Email">
+                        <input type="text" name="clientEmail" id="clientEmail" placeholder="Email">
                         Password:
-                        <input type="password" name="clientPassword" placeholder="Password">
+                        <input type="password" name="clientPassword" id="clientPassword" placeholder="Password">
                         <input type="submit" name="submit" value="Register">
                         <!-- Add the action name - value pair -->
                         <input type="hidden" name="action" value="register">

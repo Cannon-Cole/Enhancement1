@@ -13,15 +13,23 @@
             </header>
             <main>
                 <div class="content-wrapper">
-                <form action="/action_page.php">
-                    Email:
-                    <input type="text" name="clientEmail" placeholder="Email"><br>
-                    Password:
-                    <input type="password" name="clientPassword" placeholder="Password">
-                    <input type="submit" value="Login">
-                </form> 
-                <p>Not a member?</p>
-                <a class="register" href="/acme/accounts/?action=register" title="My Account">Register</a>
+                    <h1>Acme Login</h1>
+
+                    <?php
+                    if (isset($message)) {
+                        echo $message;
+                    }
+                    ?>
+                    
+                    <form action="/action_page.php">
+                        Email:
+                        <input type="text" name="clientEmail" placeholder="Email"><br>
+                        Password:
+                        <input type="password" name="clientPassword" placeholder="Password">
+                        <input type="submit" value="Login">
+                    </form> 
+                    <p>Not a member?</p>
+                    <a class="register" href="/acme/accounts/?action=registration" title="My Account">Register</a>
                 </div>
             </main>
             <footer>
