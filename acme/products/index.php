@@ -1,8 +1,6 @@
 <?php
 
 //products controller
-
-
 require_once '../library/connections.php';
 // Get the acme model for use as needed
 require_once '../model/acme-model.php';
@@ -83,7 +81,6 @@ switch ($action) {
         $invVendor = filter_input(INPUT_POST, 'invVendor');
         $invStyle = filter_input(INPUT_POST, 'invStyle');
         if (empty($invName) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invSize) || empty($invWeight) || empty($invLocation) || empty($categoryId) || empty($invVendor) || empty($invStyle)) {
-            echo"asdfasdfasf";
             $message = '<p>Please make sure all fields have a value.</p>';
             include '../view/new-product.php';
             exit;
