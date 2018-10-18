@@ -56,7 +56,6 @@ switch ($action) {
             include '../view/registration.php';
             exit;
         }
-
         break;
 
     default:

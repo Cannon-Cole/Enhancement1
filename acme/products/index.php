@@ -1,8 +1,13 @@
 <?php
 
-require_once 'acme/library/connections.php';
+//products controller
+
+
+require_once '../library/connections.php';
 // Get the acme model for use as needed
-require_once 'acme/model/acme-model.php';
+require_once '../model/acme-model.php';
+// Get the products model
+require_once '../model/products-model.php';
 
 // Get the array of categories
 $categories = getCategories();
@@ -15,9 +20,11 @@ foreach ($categories as $category) {
 }
 $navList .= '</ul>';
 
+//build category
+
 $catList = '<select name=categories>';
 foreach ($categories as $category) {
-    $catList .= "<option value='" . category . "'>" . category . "</option>";
+    $catList .= "<option value='" . $category['categoryName'] . "'>" . $category['categoryName'] . "</option>";
 }
 $catList .= '<select>';
 
@@ -27,8 +34,37 @@ if ($action == NULL) {
 }
 
 switch ($action) {
-    case 'something':
+    case 'manage':
+        include '../view/product-management.php';
         break;
+    case 'addCategory':
+        include '../view/new-category.php';
+        break;
+    case 'addProduct':
+        include '../view/new-product.php';
+        break;
+    case 'insertCategory':
+        // Filter and store the data
+        $categoryName = filter_input(INPUT_POST, 'categoryName');
+        if (empty($categoryName)) {
+            $message = '<p>Please provide a category to add.' . $categoryName . '</p>';
+            include '../view/new-category.php';
+            exit;
+        }
+
+        // Send the data to the model
+        $regOutcome = addNewCategory($categoryName);
+
+        // Check and report the result
+        if ($regOutcome === 1) {
+            $message = "<p>Category added.</p>";
+            include '../view/new-category.php';
+            exit;
+        } else {
+            $message = "<p>Category add failed</p>";
+            include '../view/new-category.php';
+            exit;
+        }
 
     default:
         include 'acme/view/home.php';
