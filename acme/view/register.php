@@ -21,13 +21,13 @@
                     ?>
                     <form method="post" action="/acme/accounts/index.php">
                         First name:
-                        <input type="text" name="clientFirstname" id="clientFirstname" placeholder="First name">
+                        <input type="text" name="clientFirstname" required id="clientFirstname" placeholder="First name">
                         Last name:
-                        <input type="password" name="clientLastname" id="clientLastname" placeholder="Last name">
+                        <input type="text" name="clientLastname" required id="clientLastname" placeholder="Last name">
                         Email:
-                        <input type="text" name="clientEmail" id="clientEmail" placeholder="Email">
-                        Password:
-                        <input type="password" name="clientPassword" id="clientPassword" placeholder="Password">
+                        <input type="email" name="clientEmail" required id="clientEmail" placeholder="Email">
+                        Password: <span class="password-requirements">8 characters and has at least 1 uppercase character, 1 number and 1 special character</span>
+                        <input type="password" name="clientPassword" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" id="clientPassword" placeholder="Password">
                         <input type="submit" name="submit" value="Register">
                         <!-- Add the action name - value pair -->
                         <input type="hidden" name="action" value="register">
