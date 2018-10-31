@@ -21,11 +21,11 @@
                     ?>
                     <form method="post" action="/acme/accounts/index.php">
                         First name:
-                        <input type="text" name="clientFirstname" required id="clientFirstname" placeholder="First name">
+                        <input type="text" name="clientFirstname" required id="clientFirstname" placeholder="First name" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";}  ?>>
                         Last name:
-                        <input type="text" name="clientLastname" required id="clientLastname" placeholder="Last name">
+                        <input type="text" name="clientLastname" required id="clientLastname" placeholder="Last name" <?php if(isset($clientLastname)){echo "value='$clientLastname'";}  ?>>
                         Email:
-                        <input type="email" name="clientEmail" required id="clientEmail" placeholder="Email">
+                        <input type="email" name="clientEmail" required id="clientEmail" placeholder="Email" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?>>
                         Password: <span class="password-requirements">8 characters and has at least 1 uppercase character, 1 number and 1 special character</span>
                         <input type="password" name="clientPassword" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" id="clientPassword" placeholder="Password">
                         <input type="submit" name="submit" value="Register">
