@@ -9,16 +9,7 @@ require_once '../model/accounts-model.php';
 // Get the functions library
 require_once '../library/functions.php';
 
-// Get the array of categories
-$categories = getCategories();
-
-// Build a navigation bar using the $categories array
-$navList = '<ul>';
-$navList .= "<li><a href='/acme/index.php' title='View the Acme home page'>Home</a></li>";
-foreach ($categories as $category) {
-    $navList .= "<li><a href='/acme/index.php?action=" . urlencode($category['categoryName']) . "' title='View our $category[categoryName] product line'>$category[categoryName]</a></li>";
-}
-$navList .= '</ul>';
+$navList = buildNav(getCategories());
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -38,7 +29,7 @@ switch ($action) {
         $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
         $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
         $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
-        
+
         $clientEmail = checkEmail($clientEmail);
         $checkPassword = checkPassword($clientPassword);
 
@@ -47,9 +38,10 @@ switch ($action) {
             include '../view/register.php';
             exit;
         }
-
+        // Hash the checked password
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
         // Send the data to the model
-        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword);
+        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
 
         // Check and report the result
         if ($regOutcome === 1) {
@@ -74,5 +66,8 @@ switch ($action) {
             include '../view/login.php';
             exit;
         }
+
+        echo "Logged in";
+
         break;
 }

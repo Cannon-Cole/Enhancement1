@@ -21,7 +21,7 @@
                     ?>
                     <form method="post" action="/acme/products/index.php">
                         Category
-                        <input type="text" name="categoryName" id="categoryName" placeholder="Category">                   
+                        <input type="text" name="categoryName" id="categoryName" placeholder="Category" required>                   
                         <input type="submit" name="submit" value="Add Category">
                         <!-- Add the action name - value pair -->
                         <input type="hidden" name="action" value="insertCategory">
