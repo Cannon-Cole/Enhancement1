@@ -100,6 +100,7 @@ switch ($action) {
             exit;
         }
         // A valid user exists, log them in
+        
         $_SESSION['loggedin'] = TRUE;
         // Remove the password from the array
         // the array_pop function removes the last
@@ -112,4 +113,14 @@ switch ($action) {
         exit;
 
         break;
+        case 'logout':
+            session_destroy();
+            unset($_COOKIE['firstname']);
+            unset($cookieFirstname);
+            $cookieFirstname = null;
+            header('Location: /');
+            echo "hi";
+            break;
+    default :
+        include '../view/admin.php';
 }

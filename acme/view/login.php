@@ -19,7 +19,6 @@
                         echo $_SESSION['message'];
                     }
                     ?>
-
                     <form method="post" action="/acme/accounts/index.php">
                         Email:
                         <input type="email" required name="clientEmail" placeholder="Email" <?php

@@ -5,12 +5,26 @@
     if (isset($cookieFirstname)) {
         echo "<span>Welcome $cookieFirstname</span>";
     }
-    ?>
-    <p>       
+
+    if (isset($_SESSION['loggedin'])) {
+        if ($_SESSION['loggedin'] == true) {
+            echo '<a href="/acme/accounts/?action=logout" title="My Account">Logout</a>';
+        } else {
+            echo
+            '<p>       
         <img class="accountImg" src="/acme/images/site/account.gif" alt="An image of a red folder">
-        <a href="/acme/accounts/?action=login" title="My Account">My Account</a>
-    </p>
+        <a href="/acme/accounts/?action=login" title="My Account">My Account</a> 
+        </p>';
+        }
+    } else {
+        echo
+        '<p>       
+        <img class="accountImg" src="/acme/images/site/account.gif" alt="An image of a red folder">
+        <a href="/acme/accounts/?action=login" title="My Account">My Account</a> 
+        </p>';
+    }
+    ?>
 </section>
 <nav>
-<?php echo $navList; ?> 
+    <?php echo $navList; ?> 
 </nav>

@@ -22,7 +22,6 @@ if ($action == NULL) {
 
 switch ($action) {
     case 'something':
-
         break;
 
     default:
