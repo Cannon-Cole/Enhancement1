@@ -1,3 +1,13 @@
+<?php
+if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
+    header('Location: /');
+}
+else{
+    if($_SESSION["clientData"]['clientLevel'] < 2){
+        header('Location: /');
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>

@@ -1,4 +1,11 @@
 <?php
+if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
+    header('Location: /');
+} else {
+    if ($_SESSION["clientData"]['clientLevel'] < 2) {
+        header('Location: /');
+    }
+}
 $catList = '<select name="categoryId" form="new-product">';
 $catList .= '<option value="0">Choose a Category</option>';
 $increment = 1;
@@ -100,10 +107,10 @@ $catList .= '</select>';
                         ?>>
                         Style
                         <input type="text" name="invStyle" id="invStyle" placeholder="Style" required <?php
-                        if (isset($invStyle)) {
-                            echo "value = '$invStyle'";
-                        }
-                        ?>>                      
+                               if (isset($invStyle)) {
+                                   echo "value = '$invStyle'";
+                               }
+                               ?>>                      
                         <input type="submit" name="submit" value="Add Product">
                         <!-- Add the action name - value pair -->
                         <input type="hidden" name="action" value="insertProduct">
@@ -111,7 +118,7 @@ $catList .= '</select>';
                 </div>
             </main>
             <footer>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
                 <p>Last Updated&#58; 24 September&#44; 2018</p>
             </footer>
         </div>
