@@ -1,4 +1,6 @@
 <?php
+// Create or access a Session
+session_start();
 
 //products controller
 require_once '../library/connections.php';

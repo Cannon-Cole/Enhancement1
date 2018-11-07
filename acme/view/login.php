@@ -14,10 +14,9 @@
             <main>
                 <div class="content-wrapper">
                     <h1>Acme Login</h1>
-
                     <?php
-                    if (isset($message)) {
-                        echo $message;
+                    if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
                     }
                     ?>
 

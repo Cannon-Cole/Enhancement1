@@ -1,5 +1,7 @@
 <?php
-
+// Create or access a Session
+session_start();
+ 
 require_once 'acme/library/connections.php';
 // Get the acme model for use as needed
 require_once 'acme/model/acme-model.php';
@@ -7,6 +9,11 @@ require_once 'acme/model/acme-model.php';
 require_once 'acme/library/functions.php';
 
 $navList = buildNav(getCategories());
+
+// Check if the firstname cookie exists, get its value
+if(isset($_COOKIE['firstname'])){
+ $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+}
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
