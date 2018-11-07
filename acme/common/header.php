@@ -8,7 +8,7 @@
 
     if (isset($_SESSION['loggedin'])) {
         if ($_SESSION['loggedin'] == true) {
-            echo '<a href="/acme/accounts/?action=logout" title="My Account">Logout</a>';
+            echo '<p><a href="/acme/accounts/?action=logout">Logout</a></p>';
         } else {
             echo
             '<p>       

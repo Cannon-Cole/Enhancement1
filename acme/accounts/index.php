@@ -115,11 +115,9 @@ switch ($action) {
         break;
         case 'logout':
             session_destroy();
-            unset($_COOKIE['firstname']);
-            unset($cookieFirstname);
+            setcookie('firstname', "", strtotime('-1 year'), '/');
             $cookieFirstname = null;
             header('Location: /');
-            echo "hi";
             break;
     default :
         include '../view/admin.php';
