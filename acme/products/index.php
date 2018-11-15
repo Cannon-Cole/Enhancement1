@@ -100,6 +100,16 @@ switch ($action) {
         }
         break;
 
+    case 'mod':
+        $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $prodInfo = getProductInfo($invId);
+        if (count($prodInfo) < 1) {
+            $message = 'Sorry, no product information could be found.';
+        }
+        include '../view/prod-update.php';
+        exit;
+        break;
+
     default:
         $products = getProductBasics();
 
