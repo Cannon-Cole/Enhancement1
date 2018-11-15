@@ -7,6 +7,10 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
         exit;
     }
 }
+
+if (isset($_SESSION['message'])) {
+ $message = $_SESSION['message'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en-us">
@@ -42,3 +46,4 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
         </div>
     </body>
 </html>
+<?php unset($_SESSION['message']); ?> 

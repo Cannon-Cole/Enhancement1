@@ -1,5 +1,5 @@
+<!--Products Controller-->
 <?php
-
 // Create or access a Session
 session_start();
 
@@ -51,18 +51,18 @@ switch ($action) {
         break;
     case 'insertProduct':
         //invName, invDescription, invImage, invThumbnail, invPrice, invStock, invSize, invWeight, 
-        // invLocation, categoryId, invVendor, invStyle
-        // Filter and store the data
+        //invLocation, categoryId, invVendor, invStyle
+        //Filter and store the data
         $invName = filter_input(INPUT_POST, 'invName', FILTER_SANITIZE_STRING);
         $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING);
         $invImage = filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING);
         $invThumbnail = filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING);
-        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_STRING, FILTER_FLAG_ALLOW_FRACTION);
-        $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_STRING);
-        $invSize = filter_input(INPUT_POST, 'invSize', FILTER_SANITIZE_STRING);
+        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
+        $invSize = filter_input(INPUT_POST, 'invSize', FILTER_SANITIZE_NUMBER_INT);
         $invWeight = filter_input(INPUT_POST, 'invWeight', FILTER_SANITIZE_STRING);
         $invLocation = filter_input(INPUT_POST, 'invLocation', FILTER_SANITIZE_STRING);
-        $categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_STRING);
+        $categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
         $catType = $categoryId;
         $invVendor = filter_input(INPUT_POST, 'invVendor', FILTER_SANITIZE_STRING);
         $invStyle = filter_input(INPUT_POST, 'invStyle', FILTER_SANITIZE_STRING);
@@ -90,11 +90,11 @@ switch ($action) {
         $regOutcome = addNewProduct($invName, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invSize, $invWeight, $invLocation, $categoryId, $invVendor, $invStyle);
         // Check and report the result
         if ($regOutcome === 1) {
-            $message = "<p>Category added.</p>";
+            $message = "<p>Product added.</p>";
             include '../view/new-product.php';
             exit;
         } else {
-            $message = "<p>Category add failed</p>";
+            $message = "<p>Product add failed</p>";
             include '../view/new-product.php';
             exit;
         }
@@ -108,6 +108,69 @@ switch ($action) {
         }
         include '../view/prod-update.php';
         exit;
+        break;
+
+    case'updateProd':
+
+        $invName = filter_input(INPUT_POST, 'invName', FILTER_SANITIZE_STRING);
+        $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING);
+        $invImage = filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING);
+        $invThumbnail = filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING);
+        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
+        $invSize = filter_input(INPUT_POST, 'invSize', FILTER_SANITIZE_NUMBER_INT);
+        $invWeight = filter_input(INPUT_POST, 'invWeight', FILTER_SANITIZE_STRING);
+        $invLocation = filter_input(INPUT_POST, 'invLocation', FILTER_SANITIZE_STRING);
+        $categoryId = filter_input(INPUT_POST, 'categoryId', FILTER_SANITIZE_NUMBER_INT);
+        $catType = $categoryId;
+        $invVendor = filter_input(INPUT_POST, 'invVendor', FILTER_SANITIZE_STRING);
+        $invStyle = filter_input(INPUT_POST, 'invStyle', FILTER_SANITIZE_STRING);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+
+        if (empty($invName) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invSize) || empty($invWeight) || empty($invLocation) || empty($categoryId) || empty($invVendor) || empty($invStyle)) {
+            if (isset($categoryId)) {
+                if ($categoryId == 0) {
+                    $message = '<p>Please make a category is selected.</p>';
+                } else {
+                    $message = '<p>Please complete all information for the item!</p>';
+                }
+            }
+
+            include '../view/prod-update.php';
+            exit;
+        }
+
+        if ($categoryId == 0) {
+            $message = '<p>Please make the category is selected.</p>';
+            include '../view/prod-update.php';
+            exit;
+        }
+
+        //check if anything has changed
+        $prodInfo = getProductInfo($invId);
+        
+        if ($prodInfo['invName'] == $invName && $prodInfo['invDescription'] == $invDescription && $prodInfo['invImage'] == $invImage &&
+                $prodInfo['invThumbnail'] == $invThumbnail && $prodInfo['invPrice'] == $invPrice && $prodInfo['invStock'] == $invStock &&
+                $prodInfo['invSize'] == $invSize && $prodInfo['invWeight'] == $invWeight && $prodInfo['invLocation'] == $invLocation &&
+                $prodInfo['categoryId'] == $categoryId && $prodInfo['invVendor'] == $invVendor && $prodInfo['invStyle'] == $invStyle) {
+             $message = "<p class='notice'>Error. $invName was not updated. Because nothing was changed.</p>";
+            include '../view/prod-update.php';
+            exit;
+        } else {
+            // Send the data to the model
+            $updateResult = updateProduct($invName, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invSize, $invWeight, $invLocation, $categoryId, $invVendor, $invStyle, $invId);
+        }
+            // Check and report the result
+        if ($updateResult) {
+            $message = "<p class='notify'>Congratulations, $invName was successfully updated.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /acme/products/');
+            exit;
+        } else {
+            $message = "<p class='notice'>Error. $invName was not updated.</p>";
+            include '../view/prod-update.php';
+            exit;
+        }
         break;
 
     default:

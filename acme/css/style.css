@@ -171,6 +171,7 @@ input:required:valid {
 
 .product-list{
     margin-left: 5em;
+    margin-bottom: 5em;
 }
 
 .product-list tr:nth-child(odd) {background: #CCC}

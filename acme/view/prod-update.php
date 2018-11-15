@@ -31,33 +31,37 @@ $catList .= '</select>';
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width = device-width, initial-scale = 1">
-        <title><?php if (isset($prodInfo['invName'])) {
-    echo "Modify $prodInfo[invName] ";
-} elseif (isset($invName)) {
-    echo $invName;
-} ?>  | Acme, Inc.</title>
+        <title><?php
+            if (isset($prodInfo['invName'])) {
+                echo "Modify $prodInfo[invName] ";
+            } elseif (isset($invName)) {
+                echo $invName;
+            }
+            ?>  | Acme, Inc.</title>
         <link rel="stylesheet" media="screen" href="../css/style.css">
     </head>
     <body>
         <div class="wrapper">
             <header>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header.php'; ?>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/header.php'; ?>
             </header>
             <main>
-                <h1><?php if (isset($prodInfo['invName'])) {
-    echo "Modify $prodInfo[invName] ";
-} elseif (isset($invName)) {
-    echo $invName;
-} ?></h1>
+                <h1><?php
+                    if (isset($prodInfo['invName'])) {
+                        echo "Modify $prodInfo[invName] ";
+                    } elseif (isset($invName)) {
+                        echo $invName;
+                    }
+                    ?></h1>
                 <div class="content-wrapper">
                     <p>All fields required</p>
-<?php
-if (isset($message)) {
-    echo $message;
-}
-?>
+                    <?php
+                    if (isset($message)) {
+                        echo $message;
+                    }
+                    ?>
                     Category<br>
-<?php echo $catList; ?><br>    
+                    <?php echo $catList; ?><br>    
                     <form method="post" id="new-product" action="/acme/products/index.php">
                         Name
                         <input type="text" name="invName" id="invName" placeholder="Name" required <?php
@@ -76,7 +80,7 @@ if (isset($message)) {
                         }
                         ?>>
                         Image path
-                        <input type="text" name="invImage" id="invImage" value="/acme/images/products/no-image.png" placeholder="Image path" required <?php
+                        <input type="text" name="invImage" id="invImage" placeholder="Image path" required <?php
                         if (isset($invImage)) {
                             echo "value = '$invImage'";
                         } elseif (isset($prodInfo['invImage'])) {
@@ -84,7 +88,7 @@ if (isset($message)) {
                         }
                         ?>>
                         Thumbnail path
-                        <input type="text" name="invThumbnail" id="invThumbnail" value="/acme/images/products/no-image.png" placeholder="Thumbnail path" required <?php
+                        <input type="text" name="invThumbnail" id="invThumbnail" placeholder="Thumbnail path" required <?php
                         if (isset($invThumbnail)) {
                             echo "value = '$invThumbnail'";
                         } elseif (isset($prodInfo['invThumbnail'])) {
@@ -117,27 +121,27 @@ if (isset($message)) {
                         ?>>
                         Weight
                         <input type="number" name="invWeight" id="invWeight" placeholder="Weight" required <?php
-                               if (isset($invWeight)) {
-                                   echo "value = '$invWeight'";
-                               } elseif (isset($prodInfo['invWeight'])) {
-                                   echo "value='$prodInfo[invWeight]'";
-                               }
+                        if (isset($invWeight)) {
+                            echo "value = '$invWeight'";
+                        } elseif (isset($prodInfo['invWeight'])) {
+                            echo "value='$prodInfo[invWeight]'";
+                        }
                         ?>>
                         Location
                         <input type="text" name="invLocation" id="invLocation" placeholder="Location" required <?php
-                               if (isset($invLocation)) {
-                                   echo "value = '$invLocation'";
-                               } elseif (isset($prodInfo['invLocation'])) {
-                                   echo "value='$prodInfo[invLocation]'";
-                               }
+                        if (isset($invLocation)) {
+                            echo "value = '$invLocation'";
+                        } elseif (isset($prodInfo['invLocation'])) {
+                            echo "value='$prodInfo[invLocation]'";
+                        }
                         ?>>
                         Vendor
                         <input type="text" name="invVendor" id="invVendor" placeholder="Vendor" required <?php
-                               if (isset($invVendor)) {
-                                   echo "value = '$invVendor'";
-                               } elseif (isset($prodInfo['invVendor'])) {
-                                   echo "value='$prodInfo[invVendor]'";
-                               }
+                        if (isset($invVendor)) {
+                            echo "value = '$invVendor'";
+                        } elseif (isset($prodInfo['invVendor'])) {
+                            echo "value='$prodInfo[invVendor]'";
+                        }
                         ?>>
                         Style
                         <input type="text" name="invStyle" id="invStyle" placeholder="Style" required <?php
@@ -146,10 +150,18 @@ if (isset($message)) {
                                } elseif (isset($prodInfo['invStyle'])) {
                                    echo "value='$prodInfo[invStyle]'";
                                }
-                        ?>>                      
+                               ?>>                      
                         <input type="submit" name="submit" value="Update Product">
                         <!-- Add the action name - value pair -->
                         <input type="hidden" name="action" value="updateProd">
+                        <!-- Primary key -->
+                        <input type="hidden" name="invId" value="<?php
+                        if (isset($prodInfo['invId'])) {
+                            echo $prodInfo['invId'];
+                        } elseif (isset($invId)) {
+                            echo $invId;
+                        }
+                        ?>"> 
                     </form>
                 </div>
             </main>
