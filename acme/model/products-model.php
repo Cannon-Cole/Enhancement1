@@ -114,3 +114,25 @@ function updateProduct($invName, $invDescription, $invImage, $invThumbnail, $inv
     // Return the indication of success (rows changed)
     return $rowsChanged;
 }
+
+function deleteProduct($invId) {
+    // Create a connection object using the acme connection function
+    $db = acmeConnect();
+    // The SQL statement
+$sql = 'DELETE FROM inventory WHERE invId = :invId'; 
+    // Create the prepared statement using the acme connection
+    $stmt = $db->prepare($sql);
+    // The next several lines replace the placeholders in the SQL
+    // statement with the actual values in the variables
+    // and tells the database the type of data it is
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+
+    // Insert the data
+    $stmt->execute();
+    // Ask how many rows changed as a result of our insert
+    $rowsChanged = $stmt->rowCount();
+    // Close the database interaction
+    $stmt->closeCursor();
+    // Return the indication of success (rows changed)
+    return $rowsChanged;
+}

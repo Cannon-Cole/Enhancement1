@@ -110,6 +110,16 @@ switch ($action) {
         exit;
         break;
 
+    case 'del':
+        $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $prodInfo = getProductInfo($invId);
+        if (count($prodInfo) < 1) {
+            $message = 'Sorry, no product information could be found.';
+        }
+        include '../view/prod-delete.php';
+        exit;
+        break;
+
     case'updateProd':
 
         $invName = filter_input(INPUT_POST, 'invName', FILTER_SANITIZE_STRING);
@@ -148,19 +158,19 @@ switch ($action) {
 
         //check if anything has changed
         $prodInfo = getProductInfo($invId);
-        
+
         if ($prodInfo['invName'] == $invName && $prodInfo['invDescription'] == $invDescription && $prodInfo['invImage'] == $invImage &&
                 $prodInfo['invThumbnail'] == $invThumbnail && $prodInfo['invPrice'] == $invPrice && $prodInfo['invStock'] == $invStock &&
                 $prodInfo['invSize'] == $invSize && $prodInfo['invWeight'] == $invWeight && $prodInfo['invLocation'] == $invLocation &&
                 $prodInfo['categoryId'] == $categoryId && $prodInfo['invVendor'] == $invVendor && $prodInfo['invStyle'] == $invStyle) {
-             $message = "<p class='notice'>Error. $invName was not updated. Because nothing was changed.</p>";
+            $message = "<p class='notice'>Error. $invName was not updated. Because nothing was changed.</p>";
             include '../view/prod-update.php';
             exit;
         } else {
             // Send the data to the model
             $updateResult = updateProduct($invName, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invSize, $invWeight, $invLocation, $categoryId, $invVendor, $invStyle, $invId);
         }
-            // Check and report the result
+        // Check and report the result
         if ($updateResult) {
             $message = "<p class='notify'>Congratulations, $invName was successfully updated.</p>";
             $_SESSION['message'] = $message;
@@ -169,6 +179,26 @@ switch ($action) {
         } else {
             $message = "<p class='notice'>Error. $invName was not updated.</p>";
             include '../view/prod-update.php';
+            exit;
+        }
+        break;
+
+    case 'deleteProd':
+
+        $invName = filter_input(INPUT_POST, 'invName', FILTER_SANITIZE_STRING);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+
+            $deleteResult = deleteProduct($invId);
+        
+        // Check and report the result
+        if ($deleteResult) {
+            $message = "<p class='notify'>Congratulations, $invName was successfully deleted.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /acme/products/');
+            exit;
+        } else {
+            $message = "<p class='notice'>Error. $invName was not deleted.</p>";
+            header('location: /acme/products/');
             exit;
         }
         break;
