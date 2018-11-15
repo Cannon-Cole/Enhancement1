@@ -1,10 +1,10 @@
 <?php
 if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
     header('Location: /');
-}
-else{
-    if($_SESSION["clientData"]['clientLevel'] < 2){
+} else {
+    if ($_SESSION["clientData"]['clientLevel'] < 2) {
         header('Location: /');
+        exit;
     }
 }
 ?>
@@ -24,10 +24,16 @@ else{
             <main>
                 <div class="content-wrapper">
                     <h2>Acme Product Management</h2>
-
                     <a class="register" href="/acme/products/?action=addCategory" title="Add Category">Add category</a>
                     <a class="register" href="/acme/products/?action=addProduct" title="Add Product">Add product</a>
                 </div>
+                <?php
+                if (isset($message)) {
+                    echo $message;
+                } if (isset($prodList)) {
+                    echo $prodList;
+                }
+                ?>
             </main>
             <footer>
                 <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>

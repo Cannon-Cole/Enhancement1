@@ -57,3 +57,14 @@ function addNewProduct($invName, $invDescription, $invImage, $invThumbnail, $inv
     // Return the indication of success (rows changed)
     return $rowsChanged;
 }
+
+//Get basic product information from the inventory table for starting an update or delete process
+function getProductBasics() {
+ $db = acmeConnect();
+ $sql = 'SELECT invName, invId FROM inventory ORDER BY invName ASC';
+ $stmt = $db->prepare($sql);
+ $stmt->execute();
+ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ $stmt->closeCursor();
+ return $products;
+}

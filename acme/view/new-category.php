@@ -5,6 +5,7 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
 else{
     if($_SESSION["clientData"]['clientLevel'] < 2){
         header('Location: /');
+        exit;
     }
 }
 ?>

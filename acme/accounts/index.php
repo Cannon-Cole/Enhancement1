@@ -108,16 +108,20 @@ switch ($action) {
         array_pop($clientData);
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
-        // Send them to the admin view
+        
+        setcookie('firstname', $_SESSION['clientData']['clientFirstname'], strtotime('+1 year'), '/');
+        
+        // Send them to the admin view        
         include '../view/admin.php';
         exit;
-
         break;
+        
         case 'logout':
             session_destroy();
             setcookie('firstname', "", strtotime('-1 year'), '/');
             $cookieFirstname = null;
             header('Location: /');
+            exit;
             break;
     default :
         include '../view/admin.php';
