@@ -121,7 +121,6 @@ switch ($action) {
         break;
 
     case'updateProd':
-
         $invName = filter_input(INPUT_POST, 'invName', FILTER_SANITIZE_STRING);
         $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING);
         $invImage = filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING);
@@ -163,7 +162,7 @@ switch ($action) {
                 $prodInfo['invThumbnail'] == $invThumbnail && $prodInfo['invPrice'] == $invPrice && $prodInfo['invStock'] == $invStock &&
                 $prodInfo['invSize'] == $invSize && $prodInfo['invWeight'] == $invWeight && $prodInfo['invLocation'] == $invLocation &&
                 $prodInfo['categoryId'] == $categoryId && $prodInfo['invVendor'] == $invVendor && $prodInfo['invStyle'] == $invStyle) {
-            $message = "<p class='notice'>Error. $invName was not updated. Because nothing was changed.</p>";
+            $message = "<p class='notice'>Error. $invName was not updated, because nothing was changed.</p>";
             include '../view/prod-update.php';
             exit;
         } else {
@@ -188,8 +187,8 @@ switch ($action) {
         $invName = filter_input(INPUT_POST, 'invName', FILTER_SANITIZE_STRING);
         $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
 
-            $deleteResult = deleteProduct($invId);
-        
+        $deleteResult = deleteProduct($invId);
+
         // Check and report the result
         if ($deleteResult) {
             $message = "<p class='notify'>Congratulations, $invName was successfully deleted.</p>";

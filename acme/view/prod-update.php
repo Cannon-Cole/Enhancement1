@@ -57,7 +57,7 @@ $catList .= '</select>';
                     <p>All fields required</p>
                     <?php
                     if (isset($message)) {
-                        echo $message;
+                        echo $message;                    
                     }
                     ?>
                     Category<br>
@@ -166,7 +166,7 @@ $catList .= '</select>';
                 </div>
             </main>
             <footer>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
                 <p>Last Updated&#58; 24 September&#44; 2018</p>
             </footer>
         </div>

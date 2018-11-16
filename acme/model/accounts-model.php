@@ -56,3 +56,16 @@ function getClient($clientEmail) {
     $stmt->closeCursor();
     return $clientData;
 }
+
+
+//Get basic product information from the inventory table for starting an update or delete process
+function getAccountBasics($clientId) {
+ $db = acmeConnect();
+ $sql = 'SELECT clientFirstname, clientLastname, clientEmail FROM clients WHERE clientId = :clientId';
+ $stmt = $db->prepare($sql);
+ $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+ $stmt->execute();
+ $products = $stmt->fetch(PDO::FETCH_ASSOC);
+ $stmt->closeCursor();
+ return $products;
+}

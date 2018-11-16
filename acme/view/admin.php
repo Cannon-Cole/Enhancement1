@@ -22,16 +22,17 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                     echo ' ';
                     echo $_SESSION["clientData"]['clientLastname'];
                     ?></h1>
+                <h2>You are logged in</h2>
                 <ul>
                     <li><?php echo 'First Name: ' . $_SESSION["clientData"]['clientFirstname']; ?></li>
                     <li><?php echo 'Last Name: ' . $_SESSION["clientData"]['clientLastname']; ?></li>
                     <li><?php echo 'Email: ' . $_SESSION["clientData"]['clientEmail']; ?></li>
-                    <li><?php echo 'Level: ' . $_SESSION["clientData"]['clientLevel']; ?></li>
-                </ul> 
-<?php if ($_SESSION["clientData"]['clientLevel'] > 1) echo '<a href="/acme/products" title="My Account">Manage Products</a>'; ?>
+                </ul>
+                <a class="register" href="/acme/accounts/?action=update-account-page&clientId=6" title="Update Account">Update Account</a>
+                <?php if ($_SESSION["clientData"]['clientLevel'] > 1) echo '<a class="register" href="/acme/products" title="My Account">Manage Products</a>'; ?>
             </main>
             <footer>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
                 <p>Last Updated&#58; 24 September&#44; 2018</p>
             </footer>
         </div>

@@ -31,7 +31,7 @@ switch ($action) {
 
 
     case 'register':
-        // Filter and store the data
+        //Filter and store the data
         $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
         $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
         $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
@@ -100,29 +100,75 @@ switch ($action) {
             exit;
         }
         // A valid user exists, log them in
-        
-        $_SESSION['loggedin'] = TRUE;
+
+        $_SESSION['loggedin'] = true;
         // Remove the password from the array
         // the array_pop function removes the last
         // element from an array
         array_pop($clientData);
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
-        
+
         setcookie('firstname', $_SESSION['clientData']['clientFirstname'], strtotime('+1 year'), '/');
-        
+
         // Send them to the admin view        
         include '../view/admin.php';
         exit;
         break;
-        
-        case 'logout':
-            session_destroy();
-            setcookie('firstname', "", strtotime('-1 year'), '/');
-            $cookieFirstname = null;
-            header('Location: /');
+
+    case 'logout':
+        session_destroy();
+        setcookie('firstname', "", strtotime('-1 year'), '/');
+        $cookieFirstname = null;
+        header('Location: /');
+        exit;
+        break;
+
+    case 'update-account-page':
+        $clientId = filter_input(INPUT_GET, 'clientId', FILTER_VALIDATE_INT);
+        $accInfo = getAccountBasics($clientId);
+        if (count($accInfo) < 1) {
+            $message = 'Sorry, no product information could be found.';
+        }
+        include '../view/acc-update.php';
+        exit;
+        break;
+
+    case 'update-account':
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+        $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_STRING);
+
+        if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
+            $message = '<p>Please fill in all the fields!</p>';
+            include '../view/acc-update.php';
             exit;
-            break;
+        }
+
+        //check if anything has changed
+        $accInfo = getAccountBasics($invId);
+
+        if ($accInfo['clientFirstname'] == $clientFirstname && $accInfo['clientLastname'] == $clientLastname && $accInfo['clientEmail'] == $clientEmail) {
+            $message = "<p class='notice'>Error. $clientFirstname your account was not updated, because nothing was changed.</p>";
+            include '../view/acc-update.php';
+            exit;
+        } else {
+            // Send the data to the model
+            $updateAccountResult = updateAccount($clientFirstname, $clientLastname, $clientEmail);
+        }
+        // Check and report the result
+        if ($updateAccountResult) {
+            $message = "<p class='notify'>Congratulations, $clientFirstname was successfully updated.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /acme/view/admin.php');
+            exit;
+        } else {
+            $message = "<p class='notice'>Error. $clientFirstname was not updated.</p>";
+            include '../view/acc-update.php';
+            exit;
+        }
+        break;
     default :
         include '../view/admin.php';
 }
