@@ -29,7 +29,7 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                     <li><?php echo 'Email: ' . $_SESSION["clientData"]['clientEmail']; ?></li>
                 </ul>
                 <a class="register" href="/acme/accounts/?action=update-account-page&clientId=6" title="Update Account">Update Account</a>
-                <?php if ($_SESSION["clientData"]['clientLevel'] > 1) echo '<a class="register" href="/acme/products" title="My Account">Manage Products</a>'; ?>
+                <?php if ($_SESSION["clientData"]['clientLevel'] > 1){ echo '<a class="register" href="/acme/products" title="My Account">Manage Products</a>';} ?>
             </main>
             <footer>
                 <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>

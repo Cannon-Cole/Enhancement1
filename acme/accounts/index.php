@@ -128,13 +128,13 @@ switch ($action) {
         $clientId = filter_input(INPUT_GET, 'clientId', FILTER_VALIDATE_INT);
         $accInfo = getAccountBasics($clientId);
         if (count($accInfo) < 1) {
-            $message = 'Sorry, no product information could be found.';
+            $message = 'Sorry, no account information could be found.';
         }
         include '../view/acc-update.php';
         exit;
         break;
 
-    case 'update-account':
+    case 'updateuseraccount':
         $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
         $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
         $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
@@ -147,7 +147,7 @@ switch ($action) {
         }
 
         //check if anything has changed
-        $accInfo = getAccountBasics($invId);
+        $accInfo = getAccountBasics($clientId);
 
         if ($accInfo['clientFirstname'] == $clientFirstname && $accInfo['clientLastname'] == $clientLastname && $accInfo['clientEmail'] == $clientEmail) {
             $message = "<p class='notice'>Error. $clientFirstname your account was not updated, because nothing was changed.</p>";
@@ -155,13 +155,17 @@ switch ($action) {
             exit;
         } else {
             // Send the data to the model
-            $updateAccountResult = updateAccount($clientFirstname, $clientLastname, $clientEmail);
+            $updateAccountResult = updateAccount($clientId, $clientFirstname, $clientLastname, $clientEmail);
         }
         // Check and report the result
         if ($updateAccountResult) {
             $message = "<p class='notify'>Congratulations, $clientFirstname was successfully updated.</p>";
             $_SESSION['message'] = $message;
-            header('location: /acme/view/admin.php');
+            $clientData = getClient($clientEmail);
+            array_pop($clientData);
+            // Store the array into the session
+            $_SESSION['clientData'] = $clientData;
+            header('location: /acme/accounts/');
             exit;
         } else {
             $message = "<p class='notice'>Error. $clientFirstname was not updated.</p>";
@@ -169,6 +173,7 @@ switch ($action) {
             exit;
         }
         break;
+
     default :
         include '../view/admin.php';
 }
