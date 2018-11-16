@@ -28,7 +28,12 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                     <li><?php echo 'Last Name: ' . $_SESSION["clientData"]['clientLastname']; ?></li>
                     <li><?php echo 'Email: ' . $_SESSION["clientData"]['clientEmail']; ?></li>
                 </ul>
-                <a class="register" href="/acme/accounts/?action=update-account-page&clientId=6" title="Update Account">Update Account</a>
+                <?php
+                $updateAccountLink = '/acme/accounts/?action=update-account-page&clientId=' . $_SESSION['clientData']['clientId'];
+                $updatePasswordLink = '/acme/accounts/?action=update-password-page&clientId=' . $_SESSION['clientData']['clientId'];
+                ?>
+                <a class="register" href="<?php echo $updateAccountLink ?>" title="Update Account">Update Account</a>
+                <a class="register" href="<?php echo $updatePasswordLink ?>" title="Change Password">Change Password</a>
                 <?php if ($_SESSION["clientData"]['clientLevel'] > 1){ echo '<a class="register" href="/acme/products" title="My Account">Manage Products</a>';} ?>
             </main>
             <footer>

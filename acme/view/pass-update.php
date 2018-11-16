@@ -10,7 +10,7 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
         <meta name="viewport" content="width = device-width, initial-scale = 1">
         <title><?php
             if (isset($accInfo['invName'])) {
-                echo "Update $accInfo[clientFirstname]'s account";
+                echo "Update $accInfo[clientFirstname]'s password ";
             } elseif (isset($clientFirstname)) {
                 echo $clientFirstname;
             }
@@ -25,7 +25,7 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
             <main>
                 <h1><?php
                     if (isset($accInfo['clientFirstname'])) {
-                        echo "Update $accInfo[clientFirstname]'s account";
+                        echo "Update $accInfo[clientFirstname]'s password";
                     } elseif (isset($clientFirstname)) {
                         echo $clientFirstname;
                     }
@@ -38,32 +38,11 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                     ?> 
                     <form method="post" id="new-product" action="/acme/accounts/index.php">
                         First Name
-                        <input type="text" name="clientFirstname" id="clientFirstname" placeholder="First Name" required <?php
-                        if (isset($clientFirstname)) {
-                            echo "value = '$clientFirstname'";
-                        } elseif (isset($accInfo['clientFirstname'])) {
-                            echo "value='$accInfo[clientFirstname]'";
-                        }
-                        ?>>
-                        Last Name
-                        <input type="text" name="clientLastname" id="clientLastname" placeholder="Last Name" required <?php
-                        if (isset($clientLastname)) {
-                            echo "value = '$clientLastname'";
-                        } elseif (isset($accInfo['clientLastname'])) {
-                            echo "value='$accInfo[clientLastname]'";
-                        }
-                        ?>>
+                        <input type="text" name="clientPassword" id="clientPassword" placeholder="Password" required>                      
                         Email
-                        <input type="text" name="clientEmail" id="clientEmail" placeholder="Email" required <?php
-                               if (isset($clientEmail)) {
-                                   echo "value = '$clientEmail'";
-                               } elseif (isset($accInfo['clientEmail'])) {
-                                   echo "value='$accInfo[clientEmail]'";
-                               }
-                               ?>>
-                        <input type="submit" name="submit" value="Update Account">
+                        <input type="submit" name="submit" value="Update Password">
                         <!-- Add the action name - value pair -->
-                        <input type="hidden" name="action" value="update-user-account">
+                        <input type="hidden" name="action" value="update-user-password">
                         <!-- Primary key -->
                         <input type="hidden" name="clientId" value="<?php
                         if (isset($accInfo['clientId'])) {

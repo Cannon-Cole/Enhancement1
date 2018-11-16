@@ -133,8 +133,18 @@ switch ($action) {
         include '../view/acc-update.php';
         exit;
         break;
+        
+        case 'update-password-page':
+        $clientId = filter_input(INPUT_GET, 'clientId', FILTER_VALIDATE_INT);
+        $accInfo = getAccountBasics($clientId);
+        if (count($accInfo) < 1) {
+            $message = 'Sorry, no account information could be found.';
+        }
+        include '../view/pass-update.php';
+        exit;
+        break;
 
-    case 'updateuseraccount':
+    case 'update-user-account':
         $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
         $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
         $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
