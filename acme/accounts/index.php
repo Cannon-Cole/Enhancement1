@@ -124,6 +124,11 @@ switch ($action) {
         exit;
         break;
 
+    case 'client-update':
+        include '../view/client-update.php';
+        exit;
+        break;
+
     case 'update-account-page':
         $clientId = filter_input(INPUT_GET, 'clientId', FILTER_VALIDATE_INT);
         $accInfo = getAccountBasics($clientId);
@@ -133,8 +138,8 @@ switch ($action) {
         include '../view/acc-update.php';
         exit;
         break;
-        
-        case 'update-password-page':
+
+    case 'update-password-page':
         $clientId = filter_input(INPUT_GET, 'clientId', FILTER_VALIDATE_INT);
         $accInfo = getAccountBasics($clientId);
         if (count($accInfo) < 1) {
@@ -169,7 +174,7 @@ switch ($action) {
         }
         // Check and report the result
         if ($updateAccountResult) {
-            $message = "<p class='notify'>Congratulations, $clientFirstname was successfully updated.</p>";
+            $message = "<p class='notify'>Congratulations, $clientFirstname's account was successfully updated.</p>";
             $_SESSION['message'] = $message;
             $clientData = getClient($clientEmail);
             array_pop($clientData);
@@ -178,8 +183,37 @@ switch ($action) {
             header('location: /acme/accounts/');
             exit;
         } else {
-            $message = "<p class='notice'>Error. $clientFirstname was not updated.</p>";
+            $message = "<p class='notice'>Error. $clientFirstname's account was not updated.</p>";
             include '../view/acc-update.php';
+            exit;
+        }
+        break;
+
+    case 'update-user-password':
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+
+        if (empty($clientPassword)) {
+            $message = '<p>Please fill in all the fields!</p>';
+            include '../view/pass-update.php';
+            exit;
+        }
+
+        //check if anything has changed
+        $accInfo = getAccountBasics($clientId);
+
+        // Send the data to the model
+        $updatePasswordResult = updatePassword($clientId, password_hash($clientPassword, PASSWORD_DEFAULT));
+
+        // Check and report the result
+        if ($updatePasswordResult) {
+            $message = "<p class='notify'>Congratulations, $clientFirstname's password was successfully changed.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /acme/accounts/');
+            exit;
+        } else {
+            $message = "<p class='notice'>Error. $clientFirstname's password was not updated.</p>";
+            include '../view/pass-update.php';
             exit;
         }
         break;

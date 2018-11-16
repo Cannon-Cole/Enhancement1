@@ -37,9 +37,8 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                     }
                     ?> 
                     <form method="post" id="new-product" action="/acme/accounts/index.php">
-                        First Name
-                        <input type="text" name="clientPassword" id="clientPassword" placeholder="Password" required>                      
-                        Email
+                       Password: <span class="password-requirements">8 characters and has at least 1 uppercase character, 1 number and 1 special character</span>
+                        <input type="password" name="clientPassword" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Password">                     
                         <input type="submit" name="submit" value="Update Password">
                         <!-- Add the action name - value pair -->
                         <input type="hidden" name="action" value="update-user-password">

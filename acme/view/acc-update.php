@@ -54,7 +54,7 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                         }
                         ?>>
                         Email
-                        <input type="text" name="clientEmail" id="clientEmail" placeholder="Email" required <?php
+                        <input type="email" name="clientEmail" id="clientEmail" placeholder="Email" required <?php
                                if (isset($clientEmail)) {
                                    echo "value = '$clientEmail'";
                                } elseif (isset($accInfo['clientEmail'])) {
