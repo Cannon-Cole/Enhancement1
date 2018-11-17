@@ -62,11 +62,11 @@ switch ($action) {
         // Check and report the result
         if ($regOutcome === 1) {
             setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
-            $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
+            $_SESSION['message'] = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
             include '../view/login.php';
             exit;
         } else {
-            $message = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
+            $_SESSION['message'] = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
             include '../view/registration.php';
             exit;
         }
@@ -81,7 +81,7 @@ switch ($action) {
 
         // Run basic checks, return if errors
         if (empty($clientEmail) || empty($passwordCheck)) {
-            $message = '<p class="notice">Please provide a valid email address and password.</p>';
+            $_SESSION['message'] = '<p class="notice">Please provide a valid email address and password.</p>';
             include '../view/login.php';
             exit;
         }
@@ -95,7 +95,7 @@ switch ($action) {
         // If the hashes don't match create an error
         // and return to the login view
         if (!$hashCheck) {
-            $message = '<p class="notice">Please check your password and try again.</p>';
+            $_SESSION['message'] = '<p class="notice">Please check your password and try again.</p>';
             include '../view/login.php';
             exit;
         }
@@ -111,8 +111,12 @@ switch ($action) {
 
         setcookie('firstname', $_SESSION['clientData']['clientFirstname'], strtotime('+1 year'), '/');
 
+       $_SESSION['message'] = "You are logged in";
+   
+        
         // Send them to the admin view        
         include '../view/admin.php';
+        //$_SESSION['message'] = "";
         exit;
         break;
 
@@ -133,7 +137,7 @@ switch ($action) {
         $clientId = filter_input(INPUT_GET, 'clientId', FILTER_VALIDATE_INT);
         $accInfo = getAccountBasics($clientId);
         if (count($accInfo) < 1) {
-            $message = 'Sorry, no account information could be found.';
+            $_SESSION['message'] = 'Sorry, no account information could be found.';
         }
         include '../view/acc-update.php';
         exit;
@@ -143,7 +147,7 @@ switch ($action) {
         $clientId = filter_input(INPUT_GET, 'clientId', FILTER_VALIDATE_INT);
         $accInfo = getAccountBasics($clientId);
         if (count($accInfo) < 1) {
-            $message = 'Sorry, no account information could be found.';
+            $_SESSION['message'] = 'Sorry, no account information could be found.';
         }
         include '../view/pass-update.php';
         exit;
@@ -156,7 +160,7 @@ switch ($action) {
         $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_STRING);
 
         if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
-            $message = '<p>Please fill in all the fields!</p>';
+            $_SESSION['message'] = '<p>Please fill in all the fields!</p>';
             include '../view/acc-update.php';
             exit;
         }
@@ -165,7 +169,7 @@ switch ($action) {
         $accInfo = getAccountBasics($clientId);
 
         if ($accInfo['clientFirstname'] == $clientFirstname && $accInfo['clientLastname'] == $clientLastname && $accInfo['clientEmail'] == $clientEmail) {
-            $message = "<p class='notice'>Error. $clientFirstname your account was not updated, because nothing was changed.</p>";
+            $_SESSION['message'] = "<p class='notice'>Error. $clientFirstname your account was not updated, because nothing was changed.</p>";
             include '../view/acc-update.php';
             exit;
         } else {
@@ -174,8 +178,7 @@ switch ($action) {
         }
         // Check and report the result
         if ($updateAccountResult) {
-            $message = "<p class='notify'>Congratulations, $clientFirstname's account was successfully updated.</p>";
-            $_SESSION['message'] = $message;
+            $_SESSION['message'] = "<p class='notify'>Congratulations, $clientFirstname's account was successfully updated.</p>";
             $clientData = getClient($clientEmail);
             array_pop($clientData);
             // Store the array into the session
@@ -183,7 +186,7 @@ switch ($action) {
             header('location: /acme/accounts/');
             exit;
         } else {
-            $message = "<p class='notice'>Error. $clientFirstname's account was not updated.</p>";
+            $_SESSION['message'] = "<p class='notice'>Error. $clientFirstname's account was not updated.</p>";
             include '../view/acc-update.php';
             exit;
         }
@@ -194,7 +197,7 @@ switch ($action) {
         $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
 
         if (empty($clientPassword)) {
-            $message = '<p>Please fill in all the fields!</p>';
+            $_SESSION['message'] = '<p>Please fill in all the fields!</p>';
             include '../view/pass-update.php';
             exit;
         }
@@ -207,12 +210,11 @@ switch ($action) {
 
         // Check and report the result
         if ($updatePasswordResult) {
-            $message = "<p class='notify'>Congratulations, $clientFirstname's password was successfully changed.</p>";
-            $_SESSION['message'] = $message;
+            $_SESSION['message'] = "<p class='notify'>Congratulations, password was successfully changed.</p>";
             header('location: /acme/accounts/');
             exit;
         } else {
-            $message = "<p class='notice'>Error. $clientFirstname's password was not updated.</p>";
+            $_SESSION['message'] = "<p class='notice'>Error. $clientFirstname's password was not updated.</p>";
             include '../view/pass-update.php';
             exit;
         }

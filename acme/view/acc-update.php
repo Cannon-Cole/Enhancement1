@@ -24,18 +24,21 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
             </header>
             <main>
                 <h1><?php
+                echo "Update "; 
                     if (isset($accInfo['clientFirstname'])) {
-                        echo "Update $accInfo[clientFirstname]'s account";
+                        echo "$accInfo[clientFirstname]'s";
                     } elseif (isset($clientFirstname)) {
                         echo $clientFirstname;
+                        echo "'s";
                     }
+                    echo " account";
                     ?></h1>
+                <?php
+                if (isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+                }
+                ?>       
                 <div class="content-wrapper">
-                    <?php
-                    if (isset($message)) {
-                        echo $message;                
-                    }
-                    ?> 
                     <form method="post" id="new-product" action="/acme/accounts/index.php">
                         First Name
                         <input type="text" name="clientFirstname" id="clientFirstname" placeholder="First Name" required <?php
@@ -76,7 +79,7 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                 </div>
             </main>
             <footer>
-                <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
                 <p>Last Updated&#58; 24 September&#44; 2018</p>
             </footer>
         </div>

@@ -31,7 +31,7 @@ switch ($action) {
         $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_STRING);
 
         if (empty($categoryName)) {
-            $message = '<p>Please provide a category to add.</p>';
+            $_SESSION['message'] = '<p>Please provide a category to add.</p>';
             include '../view/new-category.php';
             exit;
         }
@@ -44,7 +44,7 @@ switch ($action) {
             include '../view/new-category.php';
             exit;
         } else {
-            $message = "<p>Category add failed</p>";
+            $_SESSION['message'] = "<p>Category add failed</p>";
             include '../view/new-category.php';
             exit;
         }
@@ -70,9 +70,9 @@ switch ($action) {
         if (empty($invName) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invSize) || empty($invWeight) || empty($invLocation) || empty($categoryId) || empty($invVendor) || empty($invStyle)) {
             if (isset($categoryId)) {
                 if ($categoryId == 0) {
-                    $message = '<p>Please make a category is selected.</p>';
+                    $_SESSION['message'] = '<p>Please make a category is selected.</p>';
                 } else {
-                    $message = '<p>Please make sure all fields have a value.</p>';
+                    $_SESSION['message'] = '<p>Please make sure all fields have a value.</p>';
                 }
             }
 
@@ -81,7 +81,7 @@ switch ($action) {
         }
 
         if ($categoryId == 0) {
-            $message = '<p>Please make the category is selected.</p>';
+            $_SESSION['message'] = '<p>Please make the category is selected.</p>';
             include '../view/new-product.php';
             exit;
         }
@@ -90,11 +90,11 @@ switch ($action) {
         $regOutcome = addNewProduct($invName, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invSize, $invWeight, $invLocation, $categoryId, $invVendor, $invStyle);
         // Check and report the result
         if ($regOutcome === 1) {
-            $message = "<p>Product added.</p>";
+            $_SESSION['message'] = "<p>Product added.</p>";
             include '../view/new-product.php';
             exit;
         } else {
-            $message = "<p>Product add failed</p>";
+            $_SESSION['message'] = "<p>Product add failed</p>";
             include '../view/new-product.php';
             exit;
         }
@@ -104,7 +104,7 @@ switch ($action) {
         $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $prodInfo = getProductInfo($invId);
         if (count($prodInfo) < 1) {
-            $message = 'Sorry, no product information could be found.';
+            $_SESSION['message'] = 'Sorry, no product information could be found.';
         }
         include '../view/prod-update.php';
         exit;
@@ -114,7 +114,7 @@ switch ($action) {
         $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $prodInfo = getProductInfo($invId);
         if (count($prodInfo) < 1) {
-            $message = 'Sorry, no product information could be found.';
+            $_SESSION['message'] = 'Sorry, no product information could be found.';
         }
         include '../view/prod-delete.php';
         exit;
@@ -139,9 +139,9 @@ switch ($action) {
         if (empty($invName) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invSize) || empty($invWeight) || empty($invLocation) || empty($categoryId) || empty($invVendor) || empty($invStyle)) {
             if (isset($categoryId)) {
                 if ($categoryId == 0) {
-                    $message = '<p>Please make a category is selected.</p>';
+                    $_SESSION['message'] = '<p>Please make a category is selected.</p>';
                 } else {
-                    $message = '<p>Please complete all information for the item!</p>';
+                    $_SESSION['message'] = '<p>Please complete all information for the item!</p>';
                 }
             }
 
@@ -150,7 +150,7 @@ switch ($action) {
         }
 
         if ($categoryId == 0) {
-            $message = '<p>Please make the category is selected.</p>';
+            $_SESSION['message'] = '<p>Please make the category is selected.</p>';
             include '../view/prod-update.php';
             exit;
         }
@@ -162,7 +162,7 @@ switch ($action) {
                 $prodInfo['invThumbnail'] == $invThumbnail && $prodInfo['invPrice'] == $invPrice && $prodInfo['invStock'] == $invStock &&
                 $prodInfo['invSize'] == $invSize && $prodInfo['invWeight'] == $invWeight && $prodInfo['invLocation'] == $invLocation &&
                 $prodInfo['categoryId'] == $categoryId && $prodInfo['invVendor'] == $invVendor && $prodInfo['invStyle'] == $invStyle) {
-            $message = "<p class='notice'>Error. $invName was not updated, because nothing was changed.</p>";
+            $_SESSION['message'] = "<p class='notice'>Error. $invName was not updated, because nothing was changed.</p>";
             include '../view/prod-update.php';
             exit;
         } else {
@@ -171,12 +171,11 @@ switch ($action) {
         }
         // Check and report the result
         if ($updateResult) {
-            $message = "<p class='notify'>Congratulations, $invName was successfully updated.</p>";
-            $_SESSION['message'] = $message;
+            $_SESSION['message'] = "<p class='notify'>Congratulations, $invName was successfully updated.</p>";
             header('location: /acme/products/');
             exit;
         } else {
-            $message = "<p class='notice'>Error. $invName was not updated.</p>";
+            $_SESSION['message'] = "<p class='notice'>Error. $invName was not updated.</p>";
             include '../view/prod-update.php';
             exit;
         }
@@ -191,12 +190,11 @@ switch ($action) {
 
         // Check and report the result
         if ($deleteResult) {
-            $message = "<p class='notify'>Congratulations, $invName was successfully deleted.</p>";
-            $_SESSION['message'] = $message;
+            $_SESSION['message'] = "<p class='notify'>Congratulations, $invName was successfully deleted.</p>";
             header('location: /acme/products/');
             exit;
         } else {
-            $message = "<p class='notice'>Error. $invName was not deleted.</p>";
+            $_SESSION['message'] = "<p class='notice'>Error. $invName was not deleted.</p>";
             header('location: /acme/products/');
             exit;
         }
@@ -219,7 +217,7 @@ switch ($action) {
             }
             $prodList .= '</tbody></table>';
         } else {
-            $message = '<p class="notify">Sorry, no products were returned.</p>';
+            $_SESSION['message'] = '<p class="notify">Sorry, no products were returned.</p>';
         }
 
         include '../view/product-management.php';

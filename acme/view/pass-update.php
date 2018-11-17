@@ -32,12 +32,12 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                     ?></h1>
                 <div class="content-wrapper">
                     <?php
-                    if (isset($message)) {
-                        echo $message;                
+                    if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
                     }
                     ?> 
                     <form method="post" id="new-product" action="/acme/accounts/index.php">
-                       Password: <span class="password-requirements">8 characters and has at least 1 uppercase character, 1 number and 1 special character</span>
+                        Password: <span class="password-requirements">8 characters and has at least 1 uppercase character, 1 number and 1 special character</span>
                         <input type="password" name="clientPassword" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Password">                     
                         <input type="submit" name="submit" value="Update Password">
                         <!-- Add the action name - value pair -->

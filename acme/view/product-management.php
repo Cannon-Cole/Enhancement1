@@ -9,7 +9,7 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
 }
 
 if (isset($_SESSION['message'])) {
- $message = $_SESSION['message'];
+    $message = $_SESSION['message'];
 }
 ?>
 <!DOCTYPE html>
@@ -32,9 +32,7 @@ if (isset($_SESSION['message'])) {
                     <a class="register" href="/acme/products/?action=addProduct" title="Add Product">Add product</a>
                 </div>
                 <?php
-                if (isset($message)) {
-                    echo $message;
-                } if (isset($prodList)) {
+                if (isset($prodList)) {
                     echo $prodList;
                 }
                 ?>

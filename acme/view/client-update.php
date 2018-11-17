@@ -1,11 +1,6 @@
 <?php
 if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
     header('Location: /');
-} else {
-    if ($_SESSION["clientData"]['clientLevel'] < 2) {
-        header('Location: /');
-        exit;
-    }
 }
 
 if (isset($_SESSION['message'])) {
@@ -27,7 +22,7 @@ if (isset($_SESSION['message'])) {
             </header>
             <main>
                 <div class="content-wrapper">
-                    <h2>Acme Product Management</h2>
+                    <h2>Account Management</h2>
                     <?php
                     $updateAccountLink = '/acme/accounts/?action=update-account-page&clientId=' . $_SESSION['clientData']['clientId'];
                     $updatePasswordLink = '/acme/accounts/?action=update-password-page&clientId=' . $_SESSION['clientData']['clientId'];
@@ -36,9 +31,7 @@ if (isset($_SESSION['message'])) {
                     <a class="register" href="<?php echo $updatePasswordLink ?>" title="Change Password">Change Password</a>
                 </div>
                 <?php
-                if (isset($message)) {
-                    echo $message;
-                } if (isset($prodList)) {
+                if (isset($prodList)) {
                     echo $prodList;
                 }
                 ?>

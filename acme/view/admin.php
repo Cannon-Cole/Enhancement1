@@ -22,14 +22,18 @@ if (!isset($_SESSION) || $_SESSION['loggedin'] == false) {
                     echo ' ';
                     echo $_SESSION["clientData"]['clientLastname'];
                     ?></h1>
-                <h2>You are logged in</h2>
+                <?php
+                    if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
+                    }
+                    ?>
                 <ul>
                     <li><?php echo 'First Name: ' . $_SESSION["clientData"]['clientFirstname']; ?></li>
                     <li><?php echo 'Last Name: ' . $_SESSION["clientData"]['clientLastname']; ?></li>
                     <li><?php echo 'Email: ' . $_SESSION["clientData"]['clientEmail']; ?></li>
                 </ul>
                 <a class="register" href="/acme/accounts?action=client-update" title="My Account">Update Account Information</a>
-                <?php if ($_SESSION["clientData"]['clientLevel'] > 1){ echo '<a class="register" href="/acme/products" title="My Account">Manage Products</a>';} ?>
+                <?php if ($_SESSION["clientData"]['clientLevel'] > 1){ echo '<br><br><h4>Edit Products</h4><p>You can manage your products here</p><a class="register" href="/acme/products" title="My Account">Manage Products</a>';} ?>
             </main>
             <br><br>
             <footer>
