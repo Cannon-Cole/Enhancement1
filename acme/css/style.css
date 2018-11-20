@@ -201,6 +201,11 @@ input:required:valid {
     height: 200px;
 }
 
+.red-price{
+    color: red;
+    font-weight: bold;
+}
+
 /******************** Large Screen **************************/
 @media only screen and (min-width: 40em) {
     #prod-display{

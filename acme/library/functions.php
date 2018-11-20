@@ -44,9 +44,9 @@ function buildProductDetail($product){
  $pd = '<ul id="prod-detail-display">';
   $pd .= '<li>';
   $pd .= "<img src='$product[invThumbnail]' alt='Image of $product[invName] on Acme.com'>";
-  $pd .= '<hr>';
   $pd .= "<h2>$product[invName]</h2>";
-  $pd .= "<span>$product[invPrice]</span>";
+  $pd .= "<p>$product[invDescription]</p>";
+  $pd .= "<span class=red-price>$$product[invPrice]</span>";
   $pd .= '</li>';
  $pd .= '</ul>';
  return $pd;

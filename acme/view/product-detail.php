@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?php echo $productDetailResult; ?> Products | Acme, Inc.</title>
+        <title><?php echo $productDetailName; ?> Products | Acme, Inc.</title>
         <link rel="stylesheet" media="screen" href="../css/style.css">
     </head>
     <body>
