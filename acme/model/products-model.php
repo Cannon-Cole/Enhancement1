@@ -136,3 +136,14 @@ $sql = 'DELETE FROM inventory WHERE invId = :invId';
     // Return the indication of success (rows changed)
     return $rowsChanged;
 }
+
+function getProductsByCategory($categoryName){
+ $db = acmeConnect();
+ $sql = 'SELECT * FROM inventory WHERE categoryId IN (SELECT categoryId FROM categories WHERE categoryName = :categoryName)';
+ $stmt = $db->prepare($sql);
+ $stmt->bindValue(':categoryName', $categoryName, PDO::PARAM_STR);
+ $stmt->execute();
+ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ $stmt->closeCursor();
+ return $products;
+}
