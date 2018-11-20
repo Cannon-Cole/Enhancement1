@@ -208,10 +208,28 @@ switch ($action) {
         } else {
             $prodDisplay = buildProductsDisplay($products);
         }
-        echo $prodDisplay;
-
         include '../view/category.php';
         exit;
+        break;
+
+    case 'product-details':
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_STRING);
+
+        $productDetailResult = getProductDetails($invId);
+        
+        // Check and report the result
+        if (count($productDetailResult) > 0) {
+            $prodDetailDisplay = buildProductDetail($productDetailResult);
+            $productDetailName = $productDetailResult['invName'];
+            include '../view/product-detail.php';
+            exit;
+        } else {
+            $_SESSION['message'] = "<p class='notice'>Error. No product found</p>";
+            header('location: /acme/products?action=category');
+            exit;
+        }
+        include '../view/product-details.php';
+
         break;
 
     default:
@@ -220,7 +238,6 @@ switch ($action) {
         if (count($products) > 0) {
             $prodList = '<table class="product-list">';
             $prodList .= '<thead>';
-
             $prodList .= '<tr><th>Product Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>';
             $prodList .= '</thead>';
             $prodList .= '<tbody>';

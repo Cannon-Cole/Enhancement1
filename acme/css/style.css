@@ -3,6 +3,9 @@
 html {
     box-sizing: border-box;
 }
+*, *:before, *:after{
+    box-sizing: inherit;
+}
 body {
     font-family: 'Skranji', cursive;
     margin: 0px;
@@ -49,6 +52,9 @@ nav li {
 li a {
     color: #ffffff;
     text-decoration: none;
+}
+.prod-link{
+    color: black;
 }
 .active {
     background-color: #ffffff;
@@ -176,8 +182,38 @@ input:required:valid {
 
 .product-list tr:nth-child(odd) {background: #CCC}
 
+#prod-display{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#prod-display li{
+    margin-bottom: .5em;
+    border: 1px #ccc solid;
+    list-style-type: none;
+    flex: 1 1 auto;
+}
+
+#prod-display li img{
+    width: 100%;
+    height: 200px;
+}
+
 /******************** Large Screen **************************/
 @media only screen and (min-width: 40em) {
+    #prod-display{
+        flex-flow: row wrap;
+        justify-content: flex-start;
+    }
+
+    #prod-display li{
+        max-width: 200px;
+        flex: 1 0 auto;
+        text-align: center;
+        max-height: 400px;
+    }
     .test{
         position: relative;
     }
@@ -234,7 +270,7 @@ input:required:valid {
         align-items: center;
     }
 
-   
+
 
 }
 /******************* END TEMPLATE ******************************/

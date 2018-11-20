@@ -60,25 +60,25 @@ function addNewProduct($invName, $invDescription, $invImage, $invThumbnail, $inv
 
 //Get basic product information from the inventory table for starting an update or delete process
 function getProductBasics() {
- $db = acmeConnect();
- $sql = 'SELECT invName, invId FROM inventory ORDER BY invName ASC';
- $stmt = $db->prepare($sql);
- $stmt->execute();
- $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
- $stmt->closeCursor();
- return $products;
+    $db = acmeConnect();
+    $sql = 'SELECT invName, invId FROM inventory ORDER BY invName ASC';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $products;
 }
 
 // Get product information by invId
-function getProductInfo($invId){
- $db = acmeConnect();
- $sql = 'SELECT * FROM inventory WHERE invId = :invId';
- $stmt = $db->prepare($sql);
- $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
- $stmt->execute();
- $prodInfo = $stmt->fetch(PDO::FETCH_ASSOC);
- $stmt->closeCursor();
- return $prodInfo;
+function getProductInfo($invId) {
+    $db = acmeConnect();
+    $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $prodInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $prodInfo;
 }
 
 function updateProduct($invName, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invSize, $invWeight, $invLocation, $categoryId, $invVendor, $invStyle, $invId) {
@@ -119,7 +119,7 @@ function deleteProduct($invId) {
     // Create a connection object using the acme connection function
     $db = acmeConnect();
     // The SQL statement
-$sql = 'DELETE FROM inventory WHERE invId = :invId'; 
+    $sql = 'DELETE FROM inventory WHERE invId = :invId';
     // Create the prepared statement using the acme connection
     $stmt = $db->prepare($sql);
     // The next several lines replace the placeholders in the SQL
@@ -137,13 +137,24 @@ $sql = 'DELETE FROM inventory WHERE invId = :invId';
     return $rowsChanged;
 }
 
-function getProductsByCategory($categoryName){
- $db = acmeConnect();
- $sql = 'SELECT * FROM inventory WHERE categoryId IN (SELECT categoryId FROM categories WHERE categoryName = :categoryName)';
- $stmt = $db->prepare($sql);
- $stmt->bindValue(':categoryName', $categoryName, PDO::PARAM_STR);
- $stmt->execute();
- $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
- $stmt->closeCursor();
- return $products;
+function getProductsByCategory($categoryName) {
+    $db = acmeConnect();
+    $sql = 'SELECT * FROM inventory WHERE categoryId IN (SELECT categoryId FROM categories WHERE categoryName = :categoryName)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':categoryName', $categoryName, PDO::PARAM_STR);
+    $stmt->execute();
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $products;
+}
+
+function getProductDetails($invId) {
+    $db = acmeConnect();
+    $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $products = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $products;
 }
