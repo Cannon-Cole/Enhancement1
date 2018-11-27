@@ -206,6 +206,11 @@ input:required:valid {
     font-weight: bold;
 }
 
+.dark-link{
+    color: black;
+    text-decoration: underline;
+}
+
 /******************** Large Screen **************************/
 @media only screen and (min-width: 40em) {
     #prod-display{
