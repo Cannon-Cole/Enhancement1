@@ -22,9 +22,13 @@
                 if (isset($prodDetailDisplay)) {
                     echo $prodDetailDisplay;
                 }
-                ?>
+                ?>             
+                <?php
+                if (isset($thumbnailList)) {
+                    echo $thumbnailList;
+                }
+                ?>               
             </main>
-
             <footer>
                 <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
                 <p>Last Updated&#58; 24 September&#44; 2018</p>

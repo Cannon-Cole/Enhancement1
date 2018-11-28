@@ -43,12 +43,26 @@ function buildProductsDisplay($products) {
 function buildProductDetail($product) {
     $pd = '<ul id="prod-detail-display">';
     $pd .= '<li>';
-    $pd .= "<img src='$product[invThumbnail]' alt='Image of $product[invName] on Acme.com'>";
+    $pd .= "<img src='$product[invImage]' alt='Image of $product[invName] on Acme.com'>";
     $pd .= "<h2>$product[invName]</h2>";
     $pd .= "<p>$product[invDescription]</p>";
+    $pd .= "<p>Material: $product[invStyle]</p>";
+    $pd .= "<p>Vendor: $product[invVendor]</p>";
+    $pd .= "<p>Location: $product[invLocation]</p>";
     $pd .= "<span class=red-price>$$product[invPrice]</span>";
     $pd .= '</li>';
     $pd .= '</ul>';
+    return $pd;
+}
+
+function buildThumbnailList($imageList) {
+    $pd = "<hr>";
+    $pd .= "<h3>Thumbnails</h3>";
+    $pd .= "<div class='thumbnails'>";
+    foreach ($imageList as $image) {
+        $pd .= "<img class='thumbnail-pad' src='$image[imgPath]'>";
+    }
+    $pd .= "</div>";
     return $pd;
 }
 

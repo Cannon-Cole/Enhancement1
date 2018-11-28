@@ -11,6 +11,8 @@ require_once '../model/acme-model.php';
 require_once '../model/products-model.php';
 // Get the functions library
 require_once '../library/functions.php';
+// Get the uploads model
+require_once '../model/uploads-model.php';
 
 $navList = buildNav(getCategories());
 
@@ -216,6 +218,9 @@ switch ($action) {
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_STRING);
 
         $productDetailResult = getProductDetails($invId);
+        
+        $thumbnails = getThumbnails($invId);
+        $thumbnailList = buildThumbnailList($thumbnails);
         
         // Check and report the result
         if (count($productDetailResult) > 0) {

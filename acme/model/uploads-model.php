@@ -61,3 +61,15 @@ function checkExistingImage($imgName) {
     $stmt->closeCursor();
     return $imageMatch;
 }
+
+// Check for an existing image
+function getThumbnails($invId) {
+    $db = acmeConnect();
+    $sql = "SELECT imgPath FROM images WHERE invId = :invId AND imgPath LIKE '%-tn%'";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
+    $stmt->execute();
+    $imageMatch = $stmt->fetchAll();
+    $stmt->closeCursor();
+    return $imageMatch;
+}

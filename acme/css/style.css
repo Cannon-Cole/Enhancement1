@@ -211,6 +211,16 @@ input:required:valid {
     text-decoration: underline;
 }
 
+.thumbnails{
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.thumbnail-pad{
+    margin-left:1em;
+    margin-right: 1em;
+}
+
 /******************** Large Screen **************************/
 @media only screen and (min-width: 40em) {
     #prod-display{
@@ -283,9 +293,7 @@ input:required:valid {
 
 
 }
-/******************* END TEMPLATE ******************************/
 
-/***************************************************************/
 main ul:nth-of-type(1) {
     list-style: none;
 }
