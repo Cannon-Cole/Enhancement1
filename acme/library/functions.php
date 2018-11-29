@@ -57,7 +57,7 @@ function buildProductDetail($product) {
 
 function buildThumbnailList($imageList) {
     $pd = "<hr>";
-    $pd .= "<h3>Thumbnails</h3>";
+    $pd .= "<h3>Product Thumbnails</h3>";
     $pd .= "<div class='thumbnails'>";
     foreach ($imageList as $image) {
         $pd .= "<img class='thumbnail-pad' src='$image[imgPath]'>";
