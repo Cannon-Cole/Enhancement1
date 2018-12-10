@@ -158,3 +158,19 @@ function getProductDetails($invId) {
     $stmt->closeCursor();
     return $products;
 }
+
+function setFeatured($invId) {
+    $db = acmeConnect();
+    $sql = 'UPDATE inventory SET invFeatured = NULL WHERE invFeatured = 1';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->closeCursor();
+    $sql = 'UPDATE inventory SET invFeatured = 1 WHERE invId = :invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $rowsChanged = $stmt->rowCount();
+    $stmt->closeCursor();
+    return $rowsChanged;
+}

@@ -121,6 +121,17 @@ switch ($action) {
         include '../view/prod-delete.php';
         exit;
         break;
+        
+        case 'fea':
+        $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $prodInfo = getProductInfo($invId);
+        if (count($prodInfo) < 1) {
+            $_SESSION['message'] = 'Previously featured product ' . $prodInfo['invName'] . "was unfeatured";
+            //$_SESSION['message'] = 'Currently featured product is ' . $prodInfo
+        }
+        include '../view/product-management.php';
+        exit;
+        break;
 
     case'updateProd':
         $invName = filter_input(INPUT_POST, 'invName', FILTER_SANITIZE_STRING);
@@ -243,13 +254,14 @@ switch ($action) {
         if (count($products) > 0) {
             $prodList = '<table class="product-list">';
             $prodList .= '<thead>';
-            $prodList .= '<tr><th>Product Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>';
+            $prodList .= '<tr><th>Product Name</th><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
             $prodList .= '</thead>';
             $prodList .= '<tbody>';
             foreach ($products as $product) {
                 $prodList .= "<tr><td>$product[invName]</td>";
                 $prodList .= "<td><a href='/acme/products?action=mod&id=$product[invId]' title='Click to modify'>Modify</a></td>";
-                $prodList .= "<td><a href='/acme/products?action=del&id=$product[invId]' title='Click to delete'>Delete</a></td></tr>";
+                $prodList .= "<td><a href='/acme/products?action=del&id=$product[invId]' title='Click to delete'>Delete</a></td>";
+                $prodList .= "<td><a href='/acme/products?action=fea&id=$product[invId]' title='Click to feature'>Feature</a></td></tr>";
             }
             $prodList .= '</tbody></table>';
         } else {

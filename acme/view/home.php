@@ -13,17 +13,15 @@
             </header>
             <main>
                 <h1>Welcome to Acme!</h1>     
-                <section>                 
-                    <img src="acme/images/site/rocketfeature.jpg" alt="Image of coyote riding a rocket.">
+                <section>
+                    <?php if (isset($_SESSION['featured'])) {
+                        echo "<img src=";
+                        echo $_SESSION['featured']['invImage'];
+                        echo ">";
+                    }?>
                     <div class="test">
                         <div class="call-to-action">
                             <ul>
-                                <li>
-                                    <h2>Acme Rocket</h2>
-                                </li>
-                                <li>Quick lighting fuse</li>
-                                <li>NHTSA approved seat belts</li>
-                                <li>Mobile launch stand included</li>
                                 <li>
                                     <a href="acme/cart/"><img id="actionbtn" alt="Add to cart button" src="acme/images/site/iwantit.gif"></a>
                                 </li>
@@ -33,17 +31,20 @@
                 </section>
                 <section class="bottom-bar">
                     <h6 class="invisible">Bottom Bar</h6>
-                    <section class="reviews">
-                        <h3>Reviews</h3>
-                        <ul>
-                            <li>"I don't know how I ever caught roadrunners before this." (4/5)</li>
-                            <li>"That thing was fast!" (4/5)</li>
-                            <li>"Talk about fast delivery." (5/5)</li>
-                            <li>"I didn't even have to pull the meat apart." (4.5/5)</li>
-                            <li>"I'm on my thirtieth one. I love these things!" (5/5)</li>
-                        </ul>
-                    </section>
-
+                    <?php
+                    if (!isset($_SESSION['featured'])) {
+                        echo "<section class = 'reviews'>";
+                        echo "<h3>Reviews</h3>";
+                        echo "<ul>";
+                        echo "<li>I don't know how I ever caught roadrunners before this. (4/5)</li>";
+                        echo "<li>That thing was fast! (4/5)</li>";
+                        echo "<li>Talk about fast delivery. (5/5)</li>";
+                        echo "<li>I didn't even have to pull the meat apart. (4.5/5)</li>";
+                        echo "<li>I'm on my thirtieth one. I love these things! (5/5)</li>";
+                        echo "</ul>";
+                        echo "</section>";
+                    }
+                    ?>
                     <section class="recipes">
                         <h3>Featured</h3>
                         <h3>Recipes</h3>

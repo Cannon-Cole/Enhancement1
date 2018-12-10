@@ -226,6 +226,16 @@ input:required:valid {
     margin-right: 1em;
 }
 
+.side-by-side{
+    display: flex;
+    flex-direction: row;
+}
+
+.hover-button:hover{
+    background-color: #de2226;
+    border-radius: .1em;
+}
+
 /******************** Large Screen **************************/
 @media only screen and (min-width: 40em) {
     #prod-display{
