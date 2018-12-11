@@ -121,15 +121,16 @@ switch ($action) {
         include '../view/prod-delete.php';
         exit;
         break;
-        
-        case 'fea':
+
+    case 'fea':
         $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        $prodInfo = getProductInfo($invId);
-        if (count($prodInfo) < 1) {
-            $_SESSION['message'] = 'Previously featured product ' . $prodInfo['invName'] . "was unfeatured";
-            //$_SESSION['message'] = 'Currently featured product is ' . $prodInfo
-        }
-        include '../view/product-management.php';
+
+        $_SESSION['message'] = '<div class="featured-message"><p>Previously featured product was ' . getFeatured()['invName'] . "</p>";
+        $notUsed = setFeatured($invId);
+        $_SESSION['message'] .= '<p>Currently featured product is ' . getFeatured()['invName'] . "</p></div>";
+
+        header("location: /acme/products");
+
         exit;
         break;
 
@@ -229,10 +230,10 @@ switch ($action) {
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_STRING);
 
         $productDetailResult = getProductDetails($invId);
-        
+
         $thumbnails = getThumbnails($invId);
         $thumbnailList = buildThumbnailList($thumbnails);
-        
+
         // Check and report the result
         if (count($productDetailResult) > 0) {
             $prodDetailDisplay = buildProductDetail($productDetailResult);

@@ -5,14 +5,14 @@ session_start();
 require_once 'acme/library/connections.php';
 // Get the acme model for use as needed
 require_once 'acme/model/acme-model.php';
+// Get the acme model for use as needed
+require_once 'acme/model/products-model.php';
 // Get the functions library
 require_once 'acme/library/functions.php';
 
 $navList = buildNav(getCategories());
 
 $_SESSION['featured'] = getFeatured();
-
-var_dump($_SESSION['featured']);
 
 // Check if the firstname cookie exists, get its value
 if(isset($_COOKIE['firstname'])){
@@ -27,7 +27,7 @@ if ($action == NULL) {
 switch ($action) {
     case 'something':
         break;
-
+    
     default:
         include 'acme/view/home.php';
 }

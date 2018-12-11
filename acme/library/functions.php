@@ -103,16 +103,6 @@ function buildProductsSelect($products) {
     return $prodList;
 }
 
-function getFeatured() {
-    $db = acmeConnect();
-    $sql = 'SELECT invName, invImage FROM inventory WHERE invFeatured = 1';
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $image = $stmt->fetch(PDO::FETCH_ASSOC);
-    $stmt->closeCursor();
-    return $image;
-}
-
 // Handles the file upload process and returns the path
 // The file path is stored into the database
 function uploadFile($name) {

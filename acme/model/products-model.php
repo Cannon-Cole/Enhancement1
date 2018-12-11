@@ -159,6 +159,17 @@ function getProductDetails($invId) {
     return $products;
 }
 
+
+function getFeatured() {
+    $db = acmeConnect();
+    $sql = 'SELECT invName, invDescription, invImage FROM inventory WHERE invFeatured = 1';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $image = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $image;
+}
+
 function setFeatured($invId) {
     $db = acmeConnect();
     $sql = 'UPDATE inventory SET invFeatured = NULL WHERE invFeatured = 1';

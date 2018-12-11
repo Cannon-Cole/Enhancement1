@@ -31,6 +31,11 @@ if (isset($_SESSION['message'])) {
                     <a class="register" href="/acme/products/?action=addCategory" title="Add Category">Add category</a>
                     <a class="register" href="/acme/products/?action=addProduct" title="Add Product">Add product</a>
                 </div>
+                 <?php
+                    if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
+                    }
+                    ?>
                 <?php
                 if (isset($prodList)) {
                     echo $prodList;
