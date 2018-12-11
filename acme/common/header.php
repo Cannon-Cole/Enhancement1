@@ -8,7 +8,13 @@
             echo $_SESSION['clientData']['clientFirstname'];
             echo "</a></p><p>&nbsp|&nbsp</p>";
         }
-        
+
+        if (isset($_COOKIE['firstname'])) {
+            echo "<p>Welcome ";
+            echo $_COOKIE['firstname'];
+            echo "</p>";
+        }
+
         if (isset($_SESSION['loggedin'])) {
             if ($_SESSION['loggedin'] == true) {
                 echo "<p class='hover-button'><a href='/acme/accounts/?action=logout'>Logout</a></p>";

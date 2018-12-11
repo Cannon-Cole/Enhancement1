@@ -109,12 +109,11 @@ switch ($action) {
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
 
-        $_SESSION['message'] = "You are logged in";
+        setcookie('firstname', $_SESSION['clientData']['clientFirstname'], strtotime('+1 year'), '/');
 
-        $_SESSION['welcome'] = true;
-
-        setcookie('firstname', "", strtotime('-1 year'), '/');
-
+       $_SESSION['message'] = "You are logged in";
+   
+        
         // Send them to the admin view        
         include '../view/admin.php';
         //$_SESSION['message'] = "";
@@ -123,6 +122,8 @@ switch ($action) {
 
     case 'logout':
         session_destroy();
+        setcookie('firstname', "", strtotime('-1 year'), '/');
+        $cookieFirstname = null;
         header('Location: /');
         exit;
         break;

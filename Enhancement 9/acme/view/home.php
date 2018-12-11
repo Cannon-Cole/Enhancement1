@@ -13,25 +13,17 @@
             </header>
             <main>
                 <h1>Welcome to Acme!</h1>     
-                <section class="featured-box">
-                    <?php
-                    if (isset($_SESSION['featured'])) {
-                        echo "<img class='featured-image' src=";
-                        echo $_SESSION['featured']['invImage'];
-                        echo ">";
-                    }
-                    ?>
+                <section>                 
+                    <img src="acme/images/site/rocketfeature.jpg" alt="Image of coyote riding a rocket.">
                     <div class="test">
                         <div class="call-to-action">
                             <ul>
-                                <?php
-                                if (isset($_SESSION['featured'])) {
-                                    echo "<li>";
-                                    echo $_SESSION['featured']['invDescription'];
-                                    echo "</li>";
-                                    echo "<li>&nbsp</li>";
-                                }
-                                ?>
+                                <li>
+                                    <h2>Acme Rocket</h2>
+                                </li>
+                                <li>Quick lighting fuse</li>
+                                <li>NHTSA approved seat belts</li>
+                                <li>Mobile launch stand included</li>
                                 <li>
                                     <a href="acme/cart/"><img id="actionbtn" alt="Add to cart button" src="acme/images/site/iwantit.gif"></a>
                                 </li>
@@ -41,20 +33,17 @@
                 </section>
                 <section class="bottom-bar">
                     <h6 class="invisible">Bottom Bar</h6>
-                    <?php
-                    if (!isset($_SESSION['featured'])) {
-                        echo "<section class = 'reviews'>";
-                        echo "<h3>Reviews</h3>";
-                        echo "<ul>";
-                        echo "<li>I don't know how I ever caught roadrunners before this. (4/5)</li>";
-                        echo "<li>That thing was fast! (4/5)</li>";
-                        echo "<li>Talk about fast delivery. (5/5)</li>";
-                        echo "<li>I didn't even have to pull the meat apart. (4.5/5)</li>";
-                        echo "<li>I'm on my thirtieth one. I love these things! (5/5)</li>";
-                        echo "</ul>";
-                        echo "</section>";
-                    }
-                    ?>
+                    <section class="reviews">
+                        <h3>Reviews</h3>
+                        <ul>
+                            <li>"I don't know how I ever caught roadrunners before this." (4/5)</li>
+                            <li>"That thing was fast!" (4/5)</li>
+                            <li>"Talk about fast delivery." (5/5)</li>
+                            <li>"I didn't even have to pull the meat apart." (4.5/5)</li>
+                            <li>"I'm on my thirtieth one. I love these things!" (5/5)</li>
+                        </ul>
+                    </section>
+
                     <section class="recipes">
                         <h3>Featured</h3>
                         <h3>Recipes</h3>
@@ -81,7 +70,7 @@
                 </section>
             </main>
             <footer>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/acme/common/footer.php'; ?>
                 <p>Last Updated&#58; 24 September&#44; 2018</p>
             </footer>
         </div>
